@@ -1,8 +1,27 @@
 [gd_scene format=3 uid="uid://2px5bee6n3jq"]
 
+[ext_resource type="PackedScene" uid="uid://cmuo62w0syth3" path="res://scenes/dishContainer.tscn" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://vj0g2hergnvd" path="res://scenes/ingredient.tscn" id="1_elqb8"]
+[ext_resource type="Texture2D" uid="uid://bbxbxp4tk32cf" path="res://assets/sound/icon.svg" id="2_rarhs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
+size = Vector2(121, 122)
 
 [node name="Node2D" type="Node2D" unique_id=1583293859]
 
+[node name="DishContainer" parent="." unique_id=1063629412 instance=ExtResource("1_0bbpv")]
+
+[node name="Sprite2D" type="Sprite2D" parent="DishContainer" unique_id=1616709527]
+position = Vector2(358, 214)
+texture = ExtResource("2_rarhs")
+
+[node name="Area2D" type="Area2D" parent="DishContainer" unique_id=507518962]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DishContainer/Area2D" unique_id=978841237]
+position = Vector2(357.5, 214)
+shape = SubResource("RectangleShape2D_uhay8")
+
 [node name="ingredient" parent="." unique_id=1289331515 instance=ExtResource("1_elqb8")]
-position = Vector2(590, 229)
+position = Vector2(776, 199)
+
+[connection signal="area_entered" from="DishContainer/Area2D" to="DishContainer" method="_on_area_2d_area_entered"]

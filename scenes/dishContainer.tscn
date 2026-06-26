@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cmuo62w0syth3"]
+
+[ext_resource type="Script" uid="uid://dmc4oqgamimhp" path="res://scripts/DishContainer.gd" id="1_f02qf"]
+
+[node name="DishContainer" type="Node" unique_id=1063629412]
+script = ExtResource("1_f02qf")
