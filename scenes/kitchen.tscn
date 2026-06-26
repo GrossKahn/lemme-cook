@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bxf2a56p2je83"]
+
+[ext_resource type="Texture2D" uid="uid://b0ejeejkxae2i" path="res://assets/appliance/fridge-open.png" id="1_7ilqw"]
+
+[node name="Kitchen" type="Node2D" unique_id=943151925]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=407685482]
+position = Vector2(388, 316)
+texture = ExtResource("1_7ilqw")
