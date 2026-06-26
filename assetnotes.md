@@ -24,6 +24,13 @@
 
 - floor - Photo by <a href="https://unsplash.com/@catrionaobrian?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ekaterina Novitskaya</a> on <a href="https://unsplash.com/photos/brown-wooden-wall-during-daytime-KugwNl9jX1Q?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-## Spritesheet
+## magick befehle
 
-magick montage -tile 2x1 -geometry +0+0 -background transparent \*.png spritesheet.png
+### Spritesheet
+
+- anzahl der tiles anpassen
+  magick montage -tile 2x1 -geometry +0+0 -background transparent \*.png spritesheet.png
+
+### Psx|Pixelieren
+
+magick input.png -resize 120x120 -interpolate 'Nearest' -colors 256 -dither FloydSteinberg -channel A -threshold 50 output.png
