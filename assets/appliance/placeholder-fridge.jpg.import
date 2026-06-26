@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctn32o5a4eidx"
-path="res://.godot/imported/placeholder-fridge.jpg-71f3140a919c3e10964afe3924fbcc34.ctex"
+path="res://.godot/imported/placeholder-fridge.jpg-9ed8ead03196f08565ceddc99a8d7462.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/placeholder-fridge.jpg"
-dest_files=["res://.godot/imported/placeholder-fridge.jpg-71f3140a919c3e10964afe3924fbcc34.ctex"]
+source_file="res://assets/appliance/placeholder-fridge.jpg"
+dest_files=["res://.godot/imported/placeholder-fridge.jpg-9ed8ead03196f08565ceddc99a8d7462.ctex"]
 
 [params]
 

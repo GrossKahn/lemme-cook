@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1wn4pvo0iswp"
-path="res://.godot/imported/placeholder-floor.jpg-18084b520b6c096e95edeafb3ed0fcb2.ctex"
+path="res://.godot/imported/placeholder-floor.jpg-f98b3bc1e7dd90be6c762cec90548387.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/placeholder-floor.jpg"
-dest_files=["res://.godot/imported/placeholder-floor.jpg-18084b520b6c096e95edeafb3ed0fcb2.ctex"]
+source_file="res://assets/appliance/placeholder-floor.jpg"
+dest_files=["res://.godot/imported/placeholder-floor.jpg-f98b3bc1e7dd90be6c762cec90548387.ctex"]
 
 [params]
 
