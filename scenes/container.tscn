@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cmuo62w0syth3"]
+
+[ext_resource type="Script" uid="uid://dmc4oqgamimhp" path="res://DishContainer.gd" id="1_1syo6"]
+
+[node name="DishContainer" type="Node" unique_id=1063629412]
+script = ExtResource("1_1syo6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=557538578]

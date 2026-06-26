@@ -1,4 +1,4 @@
-class_name DragAndDropSprite extends Sprite2D
+class_name DishContainer extends Node
 ## Brief class description
 ##
 ## Class description main body
@@ -12,14 +12,13 @@ class_name DragAndDropSprite extends Sprite2D
 # --- Public Exports ---
 # --- Private Exports ---
 # --- Public Onready ---
-@onready var button = $Button
 # (rarely makes sense, avoid)
 # --- Private Onready ---
 # --- Public Attributes ---
-var id = ""
+var heat = 0.0
+var is_boiling = false
+var ingredients = []
 # --- Private Attributes ---
-var _is_dragging = false
-var _of = Vector2(0,0)
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -28,23 +27,11 @@ var _of = Vector2(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	button.size = texture.get_size()
-	button.position = -button.size / 2
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if _is_dragging:
-		position = get_global_mouse_position() - _of
+	pass
 
 # --- Debug Methods ---
-
-
-
-func _on_button_button_down() -> void:
-	_is_dragging = true
-	_of = get_global_mouse_position() - global_position
-
-
-func _on_button_button_up() -> void:
-	_is_dragging = false
