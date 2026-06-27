@@ -1,4 +1,4 @@
-class_name Kitchen extends Node2D
+class_name Kitchen extends Area2D
 ## Brief class description
 ##
 ## Class description main body
@@ -16,6 +16,8 @@ class_name Kitchen extends Node2D
 # --- Private Onready ---
 # --- Public Attributes ---
 # --- Private Attributes ---
+var _is_open: bool = false 
+var _lowpass_filter : AudioEffectLowPassFilter = AudioEffectLowPassFilter.new()
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -24,11 +26,27 @@ class_name Kitchen extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	AudioServer.add_bus_effect(1,_lowpass_filter,0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if _is_open:
+		$Sprite2D.set_frame(0)
+	else:
+		$Sprite2D.set_frame(1)
+		
+func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and not event.is_pressed():
+		if _is_open:
+			$AudioOpenClose.play()
+			_lowpass_filter.cutoff_hz=20000
+			_is_open = false
+		else:
+			$AudioOpenClose.play()
+			_lowpass_filter.cutoff_hz=600
+			_is_open = true
+	
+
 
 # --- Debug Methods ---

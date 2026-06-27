@@ -2,10 +2,34 @@
 
 [ext_resource type="Texture2D" uid="uid://b0ejeejkxae2i" path="res://assets/appliance/fridge-open.png" id="1_7ilqw"]
 [ext_resource type="Script" uid="uid://cvsnvixihmshm" path="res://scripts/kitchen.gd" id="1_mrp8g"]
+[ext_resource type="AudioStream" uid="uid://dj6jlyweykh1u" path="res://assets/sound/fridge-hum.wav" id="3_v3ycp"]
+[ext_resource type="AudioStream" uid="uid://b7cvf5vbjdrur" path="res://assets/sound/fridge_open.wav" id="4_g3o0j"]
+[ext_resource type="AudioStream" uid="uid://ch5gtnba34vgh" path="res://assets/sound/fridge-close.wav" id="5_58u3k"]
 
-[node name="Kitchen" type="Node2D" unique_id=943151925]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_inth8"]
+size = Vector2(168, 236)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ibrlr"]
+playback_mode = 2
+streams_count = 2
+stream_0/stream = ExtResource("4_g3o0j")
+stream_1/stream = ExtResource("5_58u3k")
+
+[node name="Kitchen" type="Area2D" unique_id=389405432]
 script = ExtResource("1_mrp8g")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1180362384]
+shape = SubResource("RectangleShape2D_inth8")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=407685482]
-position = Vector2(388, 316)
+scale = Vector2(4, 4)
 texture = ExtResource("1_7ilqw")
+hframes = 2
+
+[node name="AudioHum" type="AudioStreamPlayer2D" parent="." unique_id=756945986]
+stream = ExtResource("3_v3ycp")
+autoplay = true
+bus = &"Humming"
+
+[node name="AudioOpenClose" type="AudioStreamPlayer2D" parent="." unique_id=835978600]
+stream = SubResource("AudioStreamRandomizer_ibrlr")
