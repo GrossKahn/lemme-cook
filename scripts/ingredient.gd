@@ -1,4 +1,4 @@
-class_name Ingredient2 extends Sprite2D
+class_name Ingredient extends Node2D
 ## Brief class description
 ##
 ## Class description main body
@@ -12,16 +12,13 @@ class_name Ingredient2 extends Sprite2D
 # --- Public Exports ---
 # --- Private Exports ---
 # --- Public Onready ---
-@onready var button = $Button
 # (rarely makes sense, avoid)
 # --- Private Onready ---
-
-
 # --- Public Attributes ---
 var id: String
 # --- Private Attributes ---
-var _is_dragging = false
-var _of = Vector2(0,0)
+var _dragging = false
+var _offset = Vector2(0,0)
 
 var _sprite: Sprite2D
 # --- Public Methods ---
@@ -30,33 +27,47 @@ var _sprite: Sprite2D
 
 # --- Private Engine Methods---
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	button.size = texture.get_size()
-	button.position = -button.size / 2
-	
 
-func setup(ingredient_id: String, texture: Texture2D) -> void:
+func setup(ingredient_id: String, texture: Texture2D, width: float, height: float) -> void:
 	id = ingredient_id
 	_sprite = Sprite2D.new()
 	_sprite.texture = texture
 	
-
+	
 	add_child(_sprite)
+	set_size(width, height)
+	$IngredientArea/CollisionShape2D.shape.extents = Vector2(width/2, height/2)
+	
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$IngredientArea.input_event.connect(_on_input_event)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if _is_dragging:
-		position = get_global_mouse_position() - _of
+	if _dragging:
+		global_position = get_global_mouse_position() + _offset
 
+
+func _on_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_dragging = true
+			_offset = global_position - get_global_mouse_position()
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			_dragging = false
 # --- Debug Methods ---
 
 
 
-func _on_button_button_down() -> void:
-	_is_dragging = true
-	_of = get_global_mouse_position() - global_position
+func set_size(width: float, height: float) -> void:
+	var tex_size = _sprite.texture.get_size()
 
-
-func _on_button_button_up() -> void:
-	_is_dragging = false
+	_sprite.scale = Vector2(
+		width / tex_size.x,
+		height / tex_size.y
+	)
