@@ -7,10 +7,12 @@
 [node name="Node2D" type="Node2D" unique_id=1583293859]
 script = ExtResource("1_rarhs")
 
+[node name="Ingredient2" parent="." unique_id=1073637832 instance=ExtResource("1_elqb8")]
+
 [node name="DishContainer" parent="." unique_id=1063629412 instance=ExtResource("1_0bbpv")]
 position = Vector2(316, -156)
 
-[node name="Ingredient" parent="." unique_id=1073637832 instance=ExtResource("1_elqb8")]
+[node name="Ingredient" parent="." unique_id=1631351593 instance=ExtResource("1_elqb8")]
 position = Vector2(-353, -175)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=164730218]
