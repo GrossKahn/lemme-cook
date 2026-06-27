@@ -16,6 +16,14 @@ class_name Ingredient extends Node2D
 # --- Private Onready ---
 # --- Public Attributes ---
 var id: String
+var key_taste: String
+
+var sweetness = 0.0
+var acidity = 0.0
+var sourness = 0.0
+var saltness = 0.0
+var bitterness = 0.0
+var umami = 0.0
 # --- Private Attributes ---
 var _dragging = false
 var _offset = Vector2(0,0)
@@ -38,6 +46,26 @@ func setup(ingredient_id: String, texture: Texture2D, width: float, height: floa
 	set_size(width, height)
 	$IngredientArea/CollisionShape2D.shape.extents = Vector2(width/2, height/2)
 	
+func set_sweetness(value: float) -> void:
+	sweetness = value
+	
+func set_acidity(value: float) -> void:
+	acidity = value
+
+func set_sourness(value: float) -> void:
+	sourness = value
+	
+func set_saltness(value: float) -> void:
+	saltness = value
+	
+func set_bitterness(value: float) -> void:
+	bitterness = value
+	
+func set_umami(value: float) -> void:
+	umami = value
+	
+func set_key_taste(value: String) -> void:
+	key_taste = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

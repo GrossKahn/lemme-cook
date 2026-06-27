@@ -21,6 +21,12 @@ var heat = 0.0
 var is_boiling = false
 var ingredients = []
 
+var sweetness = 0.0
+var acidity = 0.0
+var sourness = 0.0
+var saltness = 0.0
+var bitterness = 0.0
+var umami = 0.0
 
 var id: String
 # --- Private Attributes ---
@@ -61,6 +67,7 @@ func _input(event):
 					print("Ingredient eingesammelt")
 					var parent = area.get_parent()
 					ingredients.append(parent.id)
+					updateTasteValues(parent)
 					parent.queue_free()
 					print(ingredients)
 					
@@ -72,3 +79,17 @@ func set_size(width: float, height: float) -> void:
 		width / tex_size.x,
 		height / tex_size.y
 	)
+	
+func updateTasteValues(ingredient) -> void:
+	sweetness += ingredient.sweetness
+	acidity += ingredient.acidity
+	sourness += ingredient.sourness
+	saltness += ingredient.saltness
+	bitterness += ingredient.bitterness
+	umami += ingredient.umami
+	print(sweetness)
+	print(acidity)
+	print(sourness)
+	print(saltness)
+	print(bitterness)
+	print(umami)
