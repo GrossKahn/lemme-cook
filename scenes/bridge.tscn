@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://8dhw6sccbdhk"]
+
+[ext_resource type="Texture2D" uid="uid://dtgsb88mb7240" path="res://assets/appliance/recipe-holder-psx.jpg" id="1_im2sa"]
+[ext_resource type="Texture2D" uid="uid://dny4efosttg3b" path="res://assets/appliance/kitchen-bridge-psx.jpg" id="2_1q54l"]
+
+[node name="Bridge" type="Area2D" unique_id=1513341203]
+
+[node name="SpriteTickets" type="Sprite2D" parent="." unique_id=690139530]
+texture = ExtResource("1_im2sa")
+
+[node name="SpriteBridge" type="Sprite2D" parent="." unique_id=1195190396]
+position = Vector2(0, 65)
+texture = ExtResource("2_1q54l")
