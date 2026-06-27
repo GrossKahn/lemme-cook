@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://vj0g2hergnvd" path="res://scenes/ingredient.tscn" id="1_elqb8"]
 [ext_resource type="Script" uid="uid://hwttka1r04u1" path="res://scenes/main.gd" id="1_rarhs"]
 [ext_resource type="PackedScene" uid="uid://bxf2a56p2je83" path="res://scenes/kitchen.tscn" id="4_rarhs"]
+[ext_resource type="PackedScene" uid="uid://8dhw6sccbdhk" path="res://scenes/bridge.tscn" id="5_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://bfs1q8dhesx16" path="res://scenes/stove.tscn" id="6_c01mt"]
 
 [node name="Node2D" type="Node2D" unique_id=1583293859]
 script = ExtResource("1_rarhs")
@@ -17,4 +19,11 @@ position = Vector2(-353, -175)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=164730218]
 
 [node name="Kitchen" parent="." unique_id=943151925 instance=ExtResource("4_rarhs")]
-[node name="Ingredient2" parent="." unique_id=1073637832 instance=ExtResource("1_elqb8")]
+
+[node name="Ingredient2" parent="." unique_id=2016581130 instance=ExtResource("1_elqb8")]
+
+[node name="Bridge" parent="." unique_id=1513341203 instance=ExtResource("5_vcsgt")]
+position = Vector2(319, -40)
+
+[node name="Stove" parent="." unique_id=455412022 instance=ExtResource("6_c01mt")]
+position = Vector2(134, 60)
