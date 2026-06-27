@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bxf2a56p2je83"]
 
-[ext_resource type="Texture2D" uid="uid://b0ejeejkxae2i" path="res://assets/appliance/fridge-open.png" id="1_7ilqw"]
+[ext_resource type="Texture2D" uid="uid://04pc47jbrxbj" path="res://assets/appliance/fridge-spritesheet-psx.png" id="1_7ilqw"]
 [ext_resource type="Script" uid="uid://cvsnvixihmshm" path="res://scripts/kitchen.gd" id="1_mrp8g"]
 [ext_resource type="AudioStream" uid="uid://dj6jlyweykh1u" path="res://assets/sound/fridge-hum.wav" id="3_v3ycp"]
 [ext_resource type="AudioStream" uid="uid://b7cvf5vbjdrur" path="res://assets/sound/fridge_open.wav" id="4_g3o0j"]
