@@ -9,6 +9,7 @@ class_name Ingredient extends Node2D
 # --- Signals ---
 # --- Constants ---
 # --- Enums --- (uppercase, no policy on visibility)
+
 # --- Public Exports ---
 # --- Private Exports ---
 # --- Public Onready ---
@@ -16,7 +17,7 @@ class_name Ingredient extends Node2D
 # --- Private Onready ---
 # --- Public Attributes ---
 var id: String
-var key_taste: String
+var key_taste: Array[String]
 
 var sweetness = 0.0
 var acidity = 0.0
@@ -24,6 +25,8 @@ var sourness = 0.0
 var saltness = 0.0
 var bitterness = 0.0
 var umami = 0.0
+
+
 # --- Private Attributes ---
 var _dragging = false
 var _offset = Vector2(0,0)
@@ -65,7 +68,7 @@ func set_umami(value: float) -> void:
 	umami = value
 	
 func set_key_taste(value: String) -> void:
-	key_taste = value
+	key_taste.append(value)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -99,3 +102,14 @@ func set_size(width: float, height: float) -> void:
 		width / tex_size.x,
 		height / tex_size.y
 	)
+	
+func set_recipe(recipe) -> void:
+	sweetness = recipe["sweetness"]
+	acidity = recipe["acidity"]
+	sourness = recipe["sourness"]
+	bitterness = recipe["bitterness"]
+	umami = recipe["umami"]
+	saltness = recipe["saltiness"]
+	var key_taste_raw = recipe["key_taste"]
+	for t in key_taste_raw:
+		key_taste.append(str(t))

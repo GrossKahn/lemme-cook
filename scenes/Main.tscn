@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bxf2a56p2je83" path="res://scenes/kitchen.tscn" id="4_rarhs"]
 [ext_resource type="PackedScene" uid="uid://8dhw6sccbdhk" path="res://scenes/bridge.tscn" id="5_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://bfs1q8dhesx16" path="res://scenes/stove.tscn" id="6_c01mt"]
+[ext_resource type="PackedScene" uid="uid://b0v3kg3gys08c" path="res://scenes/GameManager.tscn" id="7_nxtc6"]
 
 [node name="Node2D" type="Node2D" unique_id=1583293859]
 script = ExtResource("1_rarhs")
@@ -27,3 +28,5 @@ position = Vector2(319, -40)
 
 [node name="Stove" parent="." unique_id=455412022 instance=ExtResource("6_c01mt")]
 position = Vector2(134, 60)
+
+[node name="GameManager" parent="." unique_id=207368279 instance=ExtResource("7_nxtc6")]
