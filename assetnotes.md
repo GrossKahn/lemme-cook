@@ -24,6 +24,14 @@
 
 - floor - Photo by <a href="https://unsplash.com/@catrionaobrian?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ekaterina Novitskaya</a> on <a href="https://unsplash.com/photos/brown-wooden-wall-during-daytime-KugwNl9jX1Q?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
+- brickwall - Photo by <a href="https://unsplash.com/@waldemarbrandt67w?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Waldemar Brandt</a> on <a href="https://unsplash.com/photos/brown-brick-wall-rhaS97NhnHg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+- tiled wall - <https://www.manytextures.com/texture/148/old-tiles/>
+
+- lamp - Photo by <a href="https://unsplash.com/@kr8v?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sarmad Hashmi</a> on <a href="https://unsplash.com/photos/black-pendant-lamp-turned-on-in-room-3tbEf5O8XXA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+- window - Photo by <a href="https://unsplash.com/@anniespratt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Annie Spratt</a> on <a href="https://unsplash.com/photos/window-overlooking-green-trees-x-cEGE4dw8Q?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
 ## magick befehle
 
 ### Spritesheet
