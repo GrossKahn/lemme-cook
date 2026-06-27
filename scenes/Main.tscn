@@ -1,3 +1,16 @@
 [gd_scene format=3 uid="uid://2px5bee6n3jq"]
 
+[ext_resource type="PackedScene" uid="uid://cmuo62w0syth3" path="res://scenes/dishContainer.tscn" id="1_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://vj0g2hergnvd" path="res://scenes/ingredient.tscn" id="1_elqb8"]
+[ext_resource type="Script" uid="uid://hwttka1r04u1" path="res://scenes/main.gd" id="1_rarhs"]
+
 [node name="Node2D" type="Node2D" unique_id=1583293859]
+script = ExtResource("1_rarhs")
+
+[node name="DishContainer" parent="." unique_id=1063629412 instance=ExtResource("1_0bbpv")]
+position = Vector2(316, -156)
+
+[node name="Ingredient" parent="." unique_id=1073637832 instance=ExtResource("1_elqb8")]
+position = Vector2(-353, -175)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=164730218]
