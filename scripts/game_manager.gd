@@ -11,17 +11,43 @@ class_name GameManager extends Node
 # --- Enums --- (uppercase, no policy on visibility)
 # --- Public Exports ---
 # --- Private Exports ---
+
+var recipes = {
+	"Nudeln mit Pesto": {
+		"key_taste": ["herbal", "savory", "rich"],
+		"ingredients": ["noodles", "pesto"],
+		"sweetness": 0.2,
+		"sourness": 0.0,
+		"acidity": 0.3,
+		"saltiness": 0.7,
+		"bitterness": 0.4,
+		"umami": 0.6
+	},
+
+	"Pizza": {
+		"key_taste": ["savory", "cheesy", "tomato"],
+		"ingredients": ["dough", "tomato", "cheese"],
+		"sweetness": 0.4,
+		"sourness": 0.0,
+		"acidity": 0.6,
+		"saltiness": 0.7,
+		"bitterness": 0.1,
+		"umami": 0.8
+	},
+	
+}
 # --- Public Onready ---
 # (rarely makes sense, avoid)
 # --- Private Onready ---
 # --- Public Attributes ---
 # --- Private Attributes ---
 
-# var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 var _orders: Array[Ingredient]
 # duration of break between orders in s
-const _new_order_break: float = 150.0
+const _new_order_break: float = 5.0
 # how likely it is that a new order spawns every time _new_order_break passes
 const _new_order_likeliness: float = 0.5
 var _passed_time: float = 0.0
@@ -33,6 +59,13 @@ func submit_order(order: DishContainer):
 # --- Private Methods ---
 func _create_new_order():
 	var new_order = Ingredient.new()
+	var keys = recipes.keys()
+	var number = _rng.randi_range(0, 1)
+	var recipe = recipes[keys[number]]
+	print(recipe)
+	
+	new_order.set_recipe(recipe)
+	print(new_order.key_taste)
 
 
 
@@ -40,7 +73,7 @@ func _create_new_order():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_rng.randomize()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,4 +85,3 @@ func _process(delta: float) -> void:
 	_passed_time = _passed_time + delta
 
 # --- Debug Methods ---
-
