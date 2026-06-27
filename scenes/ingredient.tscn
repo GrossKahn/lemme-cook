@@ -1,26 +1,13 @@
 [gd_scene format=3 uid="uid://vj0g2hergnvd"]
 
-[ext_resource type="Texture2D" uid="uid://bbxbxp4tk32cf" path="res://assets/sound/icon.svg" id="1_ssx0k"]
-[ext_resource type="Script" uid="uid://pvvdk7s2pef8" path="res://scripts/ingredient.gd" id="2_de0p5"]
+[ext_resource type="Script" uid="uid://cxx0sn8nu32e0" path="res://ingredient.gd" id="1_rcex7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
-size = Vector2(122, 121)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3stb6"]
 
-[node name="ingredient" type="Sprite2D" unique_id=1289331515]
-texture = ExtResource("1_ssx0k")
-script = ExtResource("2_de0p5")
+[node name="Ingredient" type="Node2D" unique_id=1073637832]
+script = ExtResource("1_rcex7")
 
-[node name="Button" type="Button" parent="." unique_id=126770237]
-offset_left = -63.0
-offset_top = -61.0
-offset_right = 63.0
-offset_bottom = 61.0
+[node name="IngredientArea" type="Area2D" parent="." unique_id=1695240604]
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1925605474]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1144114899]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_uhay8")
-
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
-[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IngredientArea" unique_id=430420291]
+shape = SubResource("RectangleShape2D_3stb6")

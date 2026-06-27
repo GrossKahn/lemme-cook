@@ -1,4 +1,4 @@
-class_name DishContainer extends Node
+class_name Ingredient extends Node2D
 ## Brief class description
 ##
 ## Class description main body
@@ -14,16 +14,12 @@ class_name DishContainer extends Node
 # --- Public Onready ---
 # (rarely makes sense, avoid)
 # --- Private Onready ---
-
-
 # --- Public Attributes ---
-var heat = 0.0
-var is_boiling = false
-var ingredients = []
-
-
 var id: String
 # --- Private Attributes ---
+var _dragging = false
+var _offset = Vector2(0,0)
+
 var _sprite: Sprite2D
 # --- Public Methods ---
 # --- Private Methods ---
@@ -31,40 +27,43 @@ var _sprite: Sprite2D
 
 # --- Private Engine Methods---
 
+
 func setup(ingredient_id: String, texture: Texture2D, width: float, height: float) -> void:
 	id = ingredient_id
 	_sprite = Sprite2D.new()
 	_sprite.texture = texture
+	
+	
 	add_child(_sprite)
 	set_size(width, height)
-	$DishContainerArea/CollisionShape2D.shape.extents = Vector2(width/2, height/2)
+	$IngredientArea/CollisionShape2D.shape.extents = Vector2(width/2, height/2)
 	
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$IngredientArea.input_event.connect(_on_input_event)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if _dragging:
+		global_position = get_global_mouse_position() + _offset
 
-# --- Debug Methods ---
-func _input(event):
+
+func _on_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_dragging = true
+			_offset = global_position - get_global_mouse_position()
+
+func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			var areas = $DishContainerArea.get_overlapping_areas()
+			_dragging = false
+# --- Debug Methods ---
 
-			for area in areas:
-				if area.name == "IngredientArea":
-					print("Ingredient eingesammelt")
-					var parent = area.get_parent()
-					ingredients.append(parent.id)
-					parent.queue_free()
-					print(ingredients)
-					
-					
+
+
 func set_size(width: float, height: float) -> void:
 	var tex_size = _sprite.texture.get_size()
 

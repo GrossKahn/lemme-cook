@@ -2,5 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dmc4oqgamimhp" path="res://scripts/DishContainer.gd" id="1_f02qf"]
 
-[node name="DishContainer" type="Node" unique_id=1063629412]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7684"]
+size = Vector2(121, 122)
+
+[node name="DishContainer" type="Node2D" unique_id=1745348979]
 script = ExtResource("1_f02qf")
+
+[node name="DishContainerArea" type="Area2D" parent="." unique_id=355184883]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DishContainerArea" unique_id=135451957]
+shape = SubResource("RectangleShape2D_d7684")
