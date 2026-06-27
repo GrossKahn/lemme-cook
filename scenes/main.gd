@@ -38,14 +38,14 @@ func _process(delta: float) -> void:
 	pass
 	
 
-func _createIngredient(id: String, node_name: String, texture_path: String, width: float, height: float) -> void:
+func _createIngredient(id: String, node_name: String, texture_path: String, width: float, height: float, sweetness: float, acidity: float, sourness: float, saltness: float, bitterness: float, umami: float) -> void:
 	var ingredient = preload("res://scenes/ingredient.tscn").instantiate()
 	add_child(ingredient)
 	ingredient.name = node_name
 	ingredient.setup(id, load(texture_path), width, height)
 	
 func _createDishContainer(id: String, node_name: String, texture_path: String, width: float, height: float) -> void:
-	var dish_container = preload("res://scenes/ingredient.tscn").instantiate()
+	var dish_container = preload("res://scenes/dishContainer.tscn").instantiate()
 	add_child(dish_container)
 	dish_container.name = node_name
 	dish_container.setup(id, load(texture_path), width, height)
