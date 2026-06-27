@@ -16,6 +16,7 @@ class_name Ingredient extends Node2D
 # --- Private Onready ---
 # --- Public Attributes ---
 var id: String
+var key_taste: String
 
 var sweetness = 0.0
 var acidity = 0.0
@@ -62,6 +63,9 @@ func set_bitterness(value: float) -> void:
 	
 func set_umami(value: float) -> void:
 	umami = value
+	
+func set_key_taste(value: String) -> void:
+	key_taste = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
