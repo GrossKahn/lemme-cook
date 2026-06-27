@@ -17,3 +17,4 @@ position = Vector2(-353, -175)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=164730218]
 
 [node name="Kitchen" parent="." unique_id=943151925 instance=ExtResource("4_rarhs")]
+[node name="Ingredient2" parent="." unique_id=1073637832 instance=ExtResource("1_elqb8")]
