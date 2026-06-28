@@ -37,20 +37,28 @@ var _sprite: Sprite2D
 var _polygon2d: Polygon2D = self
 # --- Public Methods ---
 
-func spawn_ingredient(texture:Texture2D, polygon:PackedVector2Array,texture_info : Dictionary,global_pos,global_rot,modulate) -> void:
+func spawn_ingredient(texture:Texture2D, poly:PackedVector2Array,texture_info : Dictionary,global_pos,global_rot,modulate) -> void:
 
 
 	self.global_position = global_position
 	self.global_rotation = global_rotation
 	self.modulate = modulate
 
-	self.set_polygon(polygon)
+	self.set_polygon(poly)
+
+	var collision_polygon = CollisionPolygon2D.new()
+	collision_polygon.polygon = poly
+
+	_area.add_child(collision_polygon)
+
+
+	_area.add_child(collision_polygon)
 
 	_polygon2d.texture = texture_info.texture
 	_polygon2d.texture_scale = texture_info.scale
-	_polygon2d.texture_offset = texture_info.offset
+#	_polygon2d.texture_offset = texture_info.offset
 	_polygon2d.texture_rotation = texture_info.rot
-
+	
 
 
 
@@ -144,6 +152,7 @@ func set_key_taste(value: String) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#setup("tomato",load("res://tomato.png"),0,0)
 	$IngredientArea.input_event.connect(_on_input_event)
 
 

@@ -2,16 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://dlnqcxrs1oxa1" path="res://assets/appliance/placeholder-kitchen-psx.jpg" id="1_jkqvi"]
 [ext_resource type="Script" uid="uid://dtn5ff7yh45gs" path="res://scenes/minigame/cuttinggame.gd" id="1_wk0fl"]
-[ext_resource type="PackedScene" uid="uid://drd6cs87mxeea" path="res://scenes/minigame/ingredient_template.tscn" id="2_ag6eu"]
 [ext_resource type="PackedScene" uid="uid://dhrqqo38wiuqi" path="res://polygon2d-fracture/Pool2DBasic.tscn" id="3_mrnj2"]
 [ext_resource type="PackedScene" path="res://polygon2d-fracture/CutShapeVisualizer.tscn" id="4_mrnj2"]
 [ext_resource type="PackedScene" path="res://polygon2d-fracture/FractureShard.tscn" id="5_5qjvt"]
-[ext_resource type="Texture2D" uid="uid://bu5gvdn6e4m45" path="res://tomato.png" id="5_i2hxx"]
+[ext_resource type="PackedScene" uid="uid://vj0g2hergnvd" path="res://scenes/ingredient.tscn" id="7_5qjvt"]
 
 [node name="Node2D" type="Node2D" unique_id=2047674977]
 script = ExtResource("1_wk0fl")
 fracture_body_color = Color(1, 1, 1, 1)
-ingredient_template = ExtResource("2_ag6eu")
+ingredient_scene = ExtResource("7_5qjvt")
 
 [node name="Cuttingboard" type="Sprite2D" parent="." unique_id=181468454]
 position = Vector2(226, 161)
@@ -40,9 +39,4 @@ end_cap_mode = 2
 
 [node name="IngredientParent" type="Node2D" parent="." unique_id=406966577]
 
-[node name="IngredientTemplate" parent="IngredientParent" unique_id=107534703 instance=ExtResource("2_ag6eu")]
-position = Vector2(205.00002, -19.999996)
-scale = Vector2(2.0109656, 2.0282233)
-texture = ExtResource("5_i2hxx")
-polygon = PackedVector2Array(26.400269, 230.40002, 74.40027, 237.6, 2.4002686, 321.6, 348.00037, 297.6, 316.8003, 187.20001, 364.8003, 165.6, 312.00037, 64.8, 244.8003, 112.8, 182.40039, 35.999996, 21.600342, 74.40001, 33.60034, 206.40002)
-uv = PackedVector2Array(-45.59973, 182.40001, 74.40027, 237.6, 2.4002686, 321.6, 348.00037, 297.6, 316.8003, 187.20001, 364.8003, 165.6, 312.00037, 64.8, 244.8003, 112.8, 182.40039, 35.999996, 21.600342, 74.40001, 33.60034, 206.40002)
+[node name="Ingredient" parent="IngredientParent" unique_id=261107519 instance=ExtResource("7_5qjvt")]
