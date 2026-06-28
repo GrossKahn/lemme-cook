@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bfs1q8dhesx16" path="res://scenes/stove.tscn" id="6_c01mt"]
 [ext_resource type="Texture2D" uid="uid://cqo3v6slmd4g7" path="res://assets/room/carpet-psx.jpg" id="7_bjd11"]
 [ext_resource type="PackedScene" uid="uid://b0v3kg3gys08c" path="res://scenes/GameManager.tscn" id="7_nxtc6"]
+
 [ext_resource type="PackedScene" uid="uid://7aok4q5bve4" path="res://scenes/knife.tscn" id="14_cvmbd"]
 [ext_resource type="PackedScene" uid="uid://bebq5vqhcypve" path="res://scenes/minigame/cuttinggame.tscn" id="14_ft6cd"]
 
@@ -161,6 +162,7 @@ position = Vector2(-323, -47)
 
 [node name="GameManager" parent="." unique_id=207368279 instance=ExtResource("7_nxtc6")]
 
+<<<<<<< HEAD
 [node name="GameTimer" type="Timer" parent="GameManager" unique_id=222038967]
 wait_time = 30.0
 autostart = true
