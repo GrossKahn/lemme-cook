@@ -30,6 +30,8 @@ var umami = 0.0
 
 var key_tasteness = []
 
+var darkness = 1.0
+
 var id: String
 # --- Private Attributes ---
 var _sprite: Sprite2D
@@ -67,24 +69,8 @@ func _process(delta: float) -> void:
 		if _heating and heat <= 200:
 			heat += 5
 			print(heat)
-			if heat >= 150 and ingredients.has("patty_uncooked"):
-				var index = ingredients.find("patty_uncooked")
-				
-
-				if index != -1:
-					print("Cooking Patty")
-					ingredients[index] = "cooked_patty"
-					
-				var replaced = false
-
-				for i in range(key_tasteness.size()):
-					for j in range(key_tasteness[i].size()):
-						if key_tasteness[i][j] == "patty_uncooked" and not replaced:
-							key_tasteness[i][j] = "cooked_patty"
-							replaced = true
-							break
-					
 			
+			check_for_patty()
 		else:
 			if heat > 0:
 				heat -= 1
@@ -96,6 +82,26 @@ func _process(delta: float) -> void:
 	
 		
 
+func check_for_patty() -> void:
+	for ingredient in ingredients:
+		if ingredient.id == "patty_uncooked" and heat > 150:
+			ingredient.setup("cooked_patty",
+			load("res://assets/ingredients/patty-cooked-psx.png"), 
+			100,
+			100,
+			["meat", "cooked"] as Array[String],
+			ingredient.sweetness,
+			ingredient.acidity,
+			ingredient.sourness,
+			ingredient.saltness,
+			ingredient.bitterness,
+			ingredient.umami)
+			ingredient._polygon2d.color = Color(1.0, 1.0, 1.0)
+			
+		if ingredient.id == "patty_uncooked":
+	
+			var t = clamp(heat / 200.0, 0.0, 1.0)
+			ingredient._polygon2d.color = Color(1.0 - t, 1.0 - t, 1.0 - t)
 
 # --- Debug Methods ---
 func _input(event):
@@ -114,7 +120,7 @@ func _input(event):
 					# in Container ziehen (Position bleibt gleich)
 					ingredient.reparent(self, true)
 
-					ingredients.append(ingredient.id)
+					ingredients.append(ingredient)
 					updateTasteValues(ingredient)
 
 					print("Ingredient eingesammelt:", ingredient.id)
