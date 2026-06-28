@@ -69,9 +69,7 @@ func submit_order(order: DishContainer):
 			"sourness": order.sourness,
 			"key_taste": order.key_tasteness.duplicate()
 		})
-	for ingredient in order.ingredients:
-		if is_instance_valid(ingredient):
-			ingredient.queue_free()
+	order.ingredients = []
 	order.acidity = 0.0
 	order.saltness = 0.0
 	order.sweetness = 0.0
