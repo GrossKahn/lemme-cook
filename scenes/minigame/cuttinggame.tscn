@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bebq5vqhcypve"]
+
+[ext_resource type="Texture2D" uid="uid://dlnqcxrs1oxa1" path="res://assets/appliance/placeholder-kitchen-psx.jpg" id="1_jkqvi"]
+[ext_resource type="Script" uid="uid://dtn5ff7yh45gs" path="res://scenes/minigame/cuttinggame.gd" id="1_wk0fl"]
+[ext_resource type="PackedScene" uid="uid://drd6cs87mxeea" path="res://scenes/minigame/ingredient_template.tscn" id="2_ag6eu"]
+[ext_resource type="PackedScene" uid="uid://dhrqqo38wiuqi" path="res://polygon2d-fracture/Pool2DBasic.tscn" id="3_mrnj2"]
+[ext_resource type="PackedScene" path="res://polygon2d-fracture/CutShapeVisualizer.tscn" id="4_mrnj2"]
+[ext_resource type="PackedScene" path="res://polygon2d-fracture/FractureShard.tscn" id="5_5qjvt"]
+[ext_resource type="Texture2D" uid="uid://bu5gvdn6e4m45" path="res://tomato.png" id="5_i2hxx"]
+
+[node name="Node2D" type="Node2D" unique_id=2047674977]
+script = ExtResource("1_wk0fl")
+ingredient_template = ExtResource("2_ag6eu")
+
+[node name="Cuttingboard" type="Sprite2D" parent="." unique_id=181468454]
+position = Vector2(226, 161)
+scale = Vector2(1, 2.7272727)
+texture = ExtResource("1_jkqvi")
+region_enabled = true
+region_rect = Rect2(0, 97.98948, 80, 22.01052)
+
+[node name="Pool_CutVisualizer" parent="." unique_id=1633709248 instance=ExtResource("3_mrnj2")]
+placed_in_level = true
+instance_template = ExtResource("4_mrnj2")
+max_amount = 30
+instantiate_new_on_empty = true
+keep_instances_in_tree = true
+
+[node name="Pool_FractureShards" parent="." unique_id=1910441633 instance=ExtResource("3_mrnj2")]
+placed_in_level = true
+instance_template = ExtResource("5_5qjvt")
+max_amount = 250
+keep_instances_in_tree = true
+
+[node name="CutLine" type="Line2D" parent="." unique_id=1068647110]
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="IngredientParent" type="Node2D" parent="." unique_id=406966577]
+
+[node name="IngredientTemplate" parent="IngredientParent" unique_id=107534703 instance=ExtResource("2_ag6eu")]
+texture = ExtResource("5_i2hxx")
+polygon = PackedVector2Array(-55.892334, 187.71182, -10.242432, 341.78018, 374.92847, 347.48642, 352.10352, 7.9654236, -112.95471, 5.11232)
+uv = PackedVector2Array(-55.892334, 187.71182, -10.242432, 341.78018, 374.92847, 347.48642, 352.10352, 7.9654236, -112.95471, 5.11232)

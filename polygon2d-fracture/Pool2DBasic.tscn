@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dhrqqo38wiuqi"]
+
+[ext_resource type="Script" uid="uid://be3kux665b6sn" path="res://polygon2d-fracture/Pool2DBasic.gd" id="1"]
+
+[node name="Pool2DBasic" type="Node" unique_id=1633709248]
+script = ExtResource("1")
+
+[node name="Instances" type="Node2D" parent="." unique_id=1203957570]
