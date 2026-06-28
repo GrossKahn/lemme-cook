@@ -1,6 +1,6 @@
 class_name Recipe
 
-var ingredients: Array[Ingredient]
+var ingredients: Array[String]
 var key_taste: Array[String]
 
 var sweetness = 0.0
@@ -23,3 +23,10 @@ func set_recipe(recipe) -> void:
 	var key_taste_raw = recipe["key_taste"]
 	for t in key_taste_raw:
 		key_taste.append(str(t))
+		
+	var ingredients_raw = recipe["ingredients"]
+
+	for t in ingredients_raw:
+		ingredients.append(t)
+		
+	

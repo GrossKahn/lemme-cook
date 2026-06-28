@@ -63,7 +63,7 @@ func _ready() -> void:
 		"bun_bottom",
 		load("res://assets/ingredients/Bun Bottom.png"),
 		100, 100,
-		["bun", "bread"] as Array[String],
+		["bun_bottom", "bread"] as Array[String],
 		0.6, 0.2, 0.1, 0.5, 0.1, 0.4
 	)
 
@@ -71,7 +71,7 @@ func _ready() -> void:
 		"bun_top",
 		load("res://assets/ingredients/Bun Top.png"),
 		100, 100,
-		["bun", "bread"] as Array[String],
+		["bun_top", "bread"] as Array[String],
 		0.6, 0.2, 0.1, 0.5, 0.1, 0.4
 	)
 
@@ -87,7 +87,7 @@ func _ready() -> void:
 		"patty_uncooked",
 		load("res://assets/ingredients/Patty Uncooked.png"),
 		100, 100,
-		["meat", "patty"] as Array[String],
+		["meat", "patty_uncooked"] as Array[String],
 		0.2, 0.1, 0.1, 0.4, 0.2, 0.9
 	)
 
