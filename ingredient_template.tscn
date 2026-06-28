@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dv7gbuwfph4r"]
+
+[ext_resource type="Script" uid="uid://bluh6bb0oxvtu" path="res://scenes/minigame/ingredient_template.gd" id="1_6n2m2"]
+
+[node name="IngredientTemplate" type="Polygon2D" unique_id=107534703]
+script = ExtResource("1_6n2m2")
