@@ -1,8 +1,18 @@
-[gd_scene format=3 uid="uid://vj0g2hergnvd"]
+[gd_scene load_steps=4 format=3 uid="uid://vj0g2hergnvd"]
 
 [ext_resource type="Script" uid="uid://cxx0sn8nu32e0" path="res://scripts/ingredient.gd" id="1_rcex7"]
+[ext_resource type="AudioStream" path="res://sounds/pick up item.mp3" id="2_mh66k"]
+[ext_resource type="AudioStream" path="res://sounds/leave item.mp3" id="3_kqlw0"]
 
 [node name="Ingredient" type="Polygon2D" unique_id=261107519]
 script = ExtResource("1_rcex7")
 
 [node name="IngredientArea" type="Area2D" parent="." unique_id=1695240604]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IngredientArea" unique_id=430420291]
+shape = SubResource("RectangleShape2D_3stb6")
+
+[node name="AudioPickUp" type="AudioStreamPlayer2D" parent="." unique_id=1639477094]
+stream = ExtResource("2_mh66k")
+
+[node name="AudioLeaveItem" type="AudioStreamPlayer2D" parent="." unique_id=386186607]
+stream = ExtResource("3_kqlw0")
