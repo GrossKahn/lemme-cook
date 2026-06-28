@@ -184,13 +184,3 @@ func set_size(width: float, height: float) -> void:
 		height / tex_size.y
 	)
 	
-func set_recipe(recipe) -> void:
-	sweetness = recipe["sweetness"]
-	acidity = recipe["acidity"]
-	sourness = recipe["sourness"]
-	bitterness = recipe["bitterness"]
-	umami = recipe["umami"]
-	saltness = recipe["saltiness"]
-	var key_taste_raw = recipe["key_taste"]
-	for t in key_taste_raw:
-		key_taste.append(str(t))
