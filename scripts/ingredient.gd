@@ -47,8 +47,6 @@ static var _mouse_captured: bool = false
 
 var _cutboard
 
-@onready var _audio_pick_up: AudioStreamPlayer2D = $AudioPickUp
-@onready var _audio_leave_item: AudioStreamPlayer2D = $AudioLeaveItem
 # --- Public Methods ---
 #only call this to create a cut version of an ingredient
 func spawn_ingredient(texture:Texture2D, poly:PackedVector2Array,texture_info : Dictionary,global_pos,global_rot,mod, ingredient_dict) -> void:
@@ -222,8 +220,10 @@ func _process(delta: float) -> void:
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not _mouse_captured:
-			_audio_pick_up.play()
+		#if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not _mouse_captured:
+		#	_audio_pick_up.play()
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+
 			_dragging = true
 			_mouse_captured = true
 			_am_i_mouse_captured = true
@@ -233,7 +233,10 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and _am_i_mouse_captured:
 			if _dragging:
-				_audio_leave_item.play()
+				#_audio_leave_item.play()
+				pass
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+
 			_dragging = false
 			_mouse_captured = false
 # --- Debug Methods ---

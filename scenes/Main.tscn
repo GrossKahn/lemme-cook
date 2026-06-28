@@ -15,8 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b0v3kg3gys08c" path="res://scenes/GameManager.tscn" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://7aok4q5bve4" path="res://scenes/knife.tscn" id="14_cvmbd"]
 [ext_resource type="PackedScene" uid="uid://bebq5vqhcypve" path="res://scenes/minigame/cuttinggame.tscn" id="14_ft6cd"]
-[ext_resource type="AudioStream" uid="uid://rnpt6fj3uxtm" path="res://sounds/Game Theme.mp3" id="15_0i0ei"]
-[ext_resource type="Texture2D" uid="uid://deb74gq55eg8h" path="res://assets/room/end_screen.png" id="16_cvmbd"]
+[ext_resource type="PackedScene" uid="uid://d03rq1hisk5j5" path="res://scenes/ui/pause_menu.tscn" id="14_mwfav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
 size = Vector2(86.5, 31)
@@ -175,14 +174,16 @@ one_shot = true
 autostart = true
 
 [node name="AudioGameTheme" type="AudioStreamPlayer" parent="." unique_id=2109573737]
-stream = ExtResource("15_0i0ei")
 autoplay = true
+
+[node name="PauseMenu" parent="." unique_id=731203850 instance=ExtResource("14_mwfav")]
+visible = false
 
 [node name="SubmissionArea" type="Area2D" parent="." unique_id=221692160]
 position = Vector2(-22, 22)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubmissionArea" unique_id=760291539]
-position = Vector2(341, -57)
+position = Vector2(335, 131)
 shape = SubResource("RectangleShape2D_3stb6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1419244421]
@@ -219,7 +220,6 @@ offset_right = 443.5
 offset_bottom = 338.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("16_cvmbd")
 
 [node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=253434861]
 z_index = 200

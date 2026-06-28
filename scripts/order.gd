@@ -22,11 +22,8 @@ var _dragging: bool = false
 var _mouse_just_pressed: bool = false
 
 # --- Public Methods ---
-func set_order_text(recipe_name: String, ingredients: Array) -> void:
-	$Label.text = recipe_name + "\n\n"
-
-	for ingredient in ingredients:
-		$Label.text += "- " + ingredient + "\n"
+func set_order_text(text: String) -> void:
+	$Label.text = text
 
 # --- Private Methods ---
 

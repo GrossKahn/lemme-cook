@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bs3xy0idodo6b"]
+
+[ext_resource type="Script" uid="uid://caenbp6wrixtl" path="res://scenes/ui/audio_control.gd" id="1_7pacj"]
+[ext_resource type="Script" uid="uid://bx61h3cycsi8q" path="res://scenes/ui/settings.gd" id="1_h175o"]
+[ext_resource type="Script" uid="uid://7vcvu23o1u5e" path="res://scenes/ui/fullscreen_control.gd" id="4_ptynm"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4mgmi"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_g5lt0"]
+color = Color(0.15294118, 0.5411765, 0.9411765, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4mgmi"]
+
+[node name="Settings" type="Panel" unique_id=360528595]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h175o")
+
+[node name="Label" type="Label" parent="." unique_id=23650307]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 41.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="BackBtn" type="Button" parent="." unique_id=2031082144]
+layout_mode = 0
+offset_left = 538.0
+offset_top = 558.0
+offset_right = 620.0
+offset_bottom = 611.0
+size_flags_horizontal = 8
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[node name="AudioControl" type="HSlider" parent="." unique_id=1624396729]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -186.0
+offset_right = 334.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_4mgmi")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_g5lt0")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_g5lt0")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("1_7pacj")
+audio_bus_name = "Music"
+
+[node name="FullscreenControl" type="CheckButton" parent="." unique_id=1811773001]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 300.0
+offset_right = 910.0
+offset_bottom = 424.0
+theme_override_font_sizes/font_size = 32
+text = "Fullscreen
+"
+script = ExtResource("4_ptynm")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1700430338]
+bus = &"Music"
+
+[node name="TextEdit" type="TextEdit" parent="." unique_id=365338665]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 168.0
+offset_right = 465.0
+offset_bottom = 236.0
+theme_override_colors/search_result_color = Color(0.3019608, 0.3019608, 0.3019608, 0)
+theme_override_colors/caret_background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4mgmi")
+text = "Volume"
+
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="value_changed" from="AudioControl" to="AudioControl" method="_on_value_changed"]
+[connection signal="toggled" from="FullscreenControl" to="FullscreenControl" method="_on_toggled"]
