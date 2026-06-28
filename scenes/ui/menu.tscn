@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c3kfyocqwmjsh"]
+[gd_scene load_steps=2 format=3 uid="uid://c3kfyocqwmjsh"]
 
 [ext_resource type="Script" uid="uid://d2x36hj2ddexc" path="res://scenes/ui/menu.gd" id="1_7w7rl"]
 [ext_resource type="Texture2D" uid="uid://dyfe08f7etrbo" path="res://assets/menu/Background_Menu.png" id="2_wedc3"]
@@ -15,6 +15,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cx0sj"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+[ext_resource type="AudioStream" path="res://sounds/Menu Theme.mp3" id="2_wm6au"]
 
 [node name="Menu" type="Control" unique_id=112656972]
 layout_mode = 3
@@ -131,3 +132,10 @@ layout_mode = 1
 [connection signal="pressed" from="MainButtons/MarginContainer2/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="MainButtons/MarginContainer3/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="MainButtons/MarginContainer4/Button3" to="." method="_on_button_3_pressed"]
+[node name="AudioMenuTheme" type="AudioStreamPlayer" parent="." unique_id=689195741]
+stream = ExtResource("2_wm6au")
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer2/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer3/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer4/Button3" to="." method="_on_button_3_pressed"]
