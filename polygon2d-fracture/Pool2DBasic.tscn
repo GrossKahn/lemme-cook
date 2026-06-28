@@ -6,3 +6,4 @@
 script = ExtResource("1")
 
 [node name="Instances" type="Node2D" parent="." unique_id=1203957570]
+visible = false

@@ -42,28 +42,29 @@ var _polygon2d: Polygon2D = self
 var _cutboard
 
 # --- Public Methods ---
+#only call this to create a cut version of an ingredient
+func spawn_ingredient(texture:Texture2D, poly:PackedVector2Array,texture_info : Dictionary,global_pos,global_rot,mod, ingredient_dict) -> void:
 
-func spawn_ingredient(texture:Texture2D, poly:PackedVector2Array,texture_info : Dictionary,global_pos,global_rot,modulate) -> void:
 
 
-	self.global_position = global_position
-	self.global_rotation = global_rotation
-	self.modulate = modulate
+	global_position = global_pos
+	global_rotation = global_rot
+	modulate = mod
 
-	self.set_polygon(poly)
+	set_polygon(poly)
 
 	var collision_polygon = CollisionPolygon2D.new()
 	collision_polygon.polygon = poly
 
 	_area.add_child(collision_polygon)
 
-
-	_area.add_child(collision_polygon)
-
 	_polygon2d.texture = texture_info.texture
 	_polygon2d.texture_scale = texture_info.scale
-#	_polygon2d.texture_offset = texture_info.offset
+	_polygon2d.texture_offset = texture_info.offset
 	_polygon2d.texture_rotation = texture_info.rot
+
+	ingredient_dict["id"] = "cut " + ingredient_dict["id"]
+	set_ingredient_details(ingredient_dict)
 	
 
 
@@ -112,6 +113,28 @@ func merge_all_polygons(polygons: Array[PackedVector2Array]) -> PackedVector2Arr
 
 
 # --- Private Engine Methods---
+func set_ingredient_details(dict:Dictionary):
+
+
+	id = dict["id"] 
+	
+	# --- Taste data speichern ---
+	self.key_taste = key_taste.duplicate()
+
+	self.sweetness = dict["sweetness"]
+	self.acidity = dict["acidity"]
+	self.sourness = dict["sourness"]
+	self.saltness = dict["saltness"]
+	self.bitterness = dict["bitterness"]
+	self.umami = dict["umami"]
+
+func get_ingredient_details():
+
+
+	var dict = {"id":id,"texture":texture,"key_taste":key_taste,"sweetness":sweetness,"acidity":acidity,"sourness":sourness,"saltness":saltness,"bitterness":bitterness,"umami":umami}
+
+	return dict
+
 
 func setup(
 	ingredient_id: String,
@@ -126,17 +149,20 @@ func setup(
 	bitterness: float,
 	umami: float
 ) -> void:
+
+	var dict = {"id":ingredient_id,"texture":texture,"key_taste":key_taste,"sweetness":sweetness,"acidity":acidity,"sourness":sourness,"saltness":saltness,"bitterness":bitterness,"umami":umami}
+	set_ingredient_details(dict)
 	id = ingredient_id
 	
 	# --- Taste data speichern ---
-	self.key_taste = key_taste.duplicate()
-
-	self.sweetness = sweetness
-	self.acidity = acidity
-	self.sourness = sourness
-	self.saltness = saltness
-	self.bitterness = bitterness
-	self.umami = umami
+	#	self.key_taste = key_taste.duplicate()
+	#
+	#	self.sweetness = sweetness
+	#	self.acidity = acidity
+	#	self.sourness = sourness
+	#	self.saltness = saltness
+	#	self.bitterness = bitterness
+	#	self.umami = umami
 	
 	var new_polygon = merge_all_polygons(_create_polygon_from_image(texture))
 

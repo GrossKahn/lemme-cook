@@ -227,7 +227,7 @@ func cutSourcePolygons(cut_pos : Vector2, cut_shape : PackedVector2Array, cut_ro
 			var mass : float = s_mass * area_p
 			var dir : Vector2 = (shape.spawn_pos - cut_pos).normalized()
 			
-			call_deferred("spawnCutIngredient", shape, source.modulate, s_lin_vel + dir * cut_force, s_ang_vel, mass, cut_pos, source.getTextureInfo())
+			call_deferred("spawnCutIngredient", shape, source.modulate, s_lin_vel + dir * cut_force, s_ang_vel, mass, cut_pos, source.getTextureInfo(),source.get_ingredient_details())
 		
 		source.queue_free()
 
@@ -247,7 +247,7 @@ func spawnFractureBody(fracture_shard : Dictionary, texture_info : Dictionary, n
 
 
 	#TODO: Anpassen zum spawnen von geschnittenen ingredient teilen
-func spawnCutIngredient(shape_info : Dictionary, color : Color, lin_vel : Vector2, ang_vel : float, mass : float, cut_pos : Vector2, texture_info : Dictionary) -> void:
+func spawnCutIngredient(shape_info : Dictionary, color : Color, lin_vel : Vector2, ang_vel : float, mass : float, cut_pos : Vector2, texture_info : Dictionary,details) -> void:
 	var instance:Ingredient = ingredient_scene.instantiate()
 	_ingredient_parent.add_child(instance)
 
@@ -256,7 +256,7 @@ func spawnCutIngredient(shape_info : Dictionary, color : Color, lin_vel : Vector
 	var rot = shape_info.spawn_rot
 	var poly =shape_info.centered_shape
 
-	instance.spawn_ingredient(texture.texture, poly,texture_info,pos,rot,color)
+	instance.spawn_ingredient(texture.texture, poly,texture_info,pos,rot,color,details)
 
 # --- Private Engine Methods---
 
