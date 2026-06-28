@@ -55,12 +55,13 @@ var _cut_line_last_end_point := Vector3.ZERO #z is used as bool -> 0 = not a val
 
 		# (....,cut_min_area,fracture_min_area,shard_min_area,fracture_num)
 #
-var _cut_min_area = 500
+var _cut_min_area = 50
 var _fracture_min_area = 50
 var _shard_min_area = 30
 var _fracture_num = 3
 
 var _ingredient_parent
+var _knife_node
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -70,7 +71,7 @@ func _input(event: InputEvent) -> void:
 	
 	#this system works with 1 button (instead of 2 with right mouse button) -> makes it work on touch screens
 	if event is InputEventMouseButton:
-		if _cutboard.can_cut:
+		if _cutboard.can_cut && _knife_node._dragging:
 
 			if event.button_index == 1:
 				if _cut_line_enabled:
@@ -265,6 +266,8 @@ func _ready() -> void:
 	_rng.randomize()
 	
 	_ingredient_parent = get_parent().get_ingredient_root()
+	_knife_node = get_parent().get_knife()
+
 	var color := Color.WHITE
 	color.s = fracture_body_color.s
 	color.v = fracture_body_color.v

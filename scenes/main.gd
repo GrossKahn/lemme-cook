@@ -40,7 +40,10 @@ class Dish:
 func get_ingredient_root():
 	return $IngredientList
 
-# --- Private Methods ---
+func get_knife():
+	return  %Knife
+
+#--- Private Methods ---
 
 
 # --- Private Engine Methods---
