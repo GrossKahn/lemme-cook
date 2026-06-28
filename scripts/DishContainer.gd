@@ -1,4 +1,4 @@
-class_name DishContainer extends Node
+class_name DishContainer extends Node2D
 ## Brief class description
 ##
 ## Class description main body
@@ -28,9 +28,13 @@ var saltness = 0.0
 var bitterness = 0.0
 var umami = 0.0
 
+var key_tasteness = []
+
 var id: String
 # --- Private Attributes ---
 var _sprite: Sprite2D
+var _dragging = false
+var _offset = Vector2(0,0)
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -49,12 +53,13 @@ func setup(ingredient_id: String, texture: Texture2D, width: float, height: floa
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$DishContainerArea.input_event.connect(_on_input_event)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if _dragging:
+		global_position = get_global_mouse_position() + _offset
 
 # --- Debug Methods ---
 func _input(event):
@@ -72,6 +77,17 @@ func _input(event):
 					print(ingredients)
 					
 					
+func _on_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_dragging = true
+			_offset = global_position - get_global_mouse_position()
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			_dragging = false
+
 func set_size(width: float, height: float) -> void:
 	var tex_size = _sprite.texture.get_size()
 
@@ -87,6 +103,7 @@ func updateTasteValues(ingredient) -> void:
 	saltness += ingredient.saltness
 	bitterness += ingredient.bitterness
 	umami += ingredient.umami
+	key_tasteness.append(ingredient.key_taste)
 	print(sweetness)
 	print(acidity)
 	print(sourness)
