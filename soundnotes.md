@@ -9,6 +9,7 @@
 - turn on/off stove
 
 - cutting ingredients
+
 - washing ingredients
 
 - sizzling
