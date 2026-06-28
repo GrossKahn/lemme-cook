@@ -14,6 +14,8 @@ class_name DishContainer extends Node2D
 # --- Public Onready ---
 # (rarely makes sense, avoid)
 # --- Private Onready ---
+@onready var cook_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 
 
 # --- Public Attributes ---
@@ -39,6 +41,7 @@ var _dragging = false
 var _offset = Vector2(0,0)
 var _heating = false
 var _last_time := 0.0
+var _sizzling = true
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -99,7 +102,10 @@ func check_for_patty() -> void:
 			ingredient._polygon2d.color = Color(1.0, 1.0, 1.0)
 			
 		if ingredient.id == "patty_uncooked":
-	
+			if _sizzling:
+				cook_sound.play()
+			_sizzling = false
+			
 			var t = clamp(heat / 200.0, 0.0, 1.0)
 			ingredient._polygon2d.color = Color(1.0 - t, 1.0 - t, 1.0 - t)
 
