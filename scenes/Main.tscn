@@ -15,11 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://b0v3kg3gys08c" path="res://scenes/GameManager.tscn" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://7aok4q5bve4" path="res://scenes/knife.tscn" id="14_cvmbd"]
 [ext_resource type="PackedScene" uid="uid://bebq5vqhcypve" path="res://scenes/minigame/cuttinggame.tscn" id="14_ft6cd"]
-
-[ext_resource type="AudioStream" path="res://sounds/Game Theme.mp3" id="15_0i0ei"]
-
+[ext_resource type="AudioStream" uid="uid://rnpt6fj3uxtm" path="res://sounds/Game Theme.mp3" id="15_0i0ei"]
 [ext_resource type="Texture2D" uid="uid://deb74gq55eg8h" path="res://assets/room/end_screen.png" id="16_cvmbd"]
-
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
 size = Vector2(86.5, 31)
@@ -172,14 +169,14 @@ position = Vector2(-323, -47)
 wait_time = 15.0
 autostart = true
 
-[node name="AudioGameTheme" type="AudioStreamPlayer" parent="." unique_id=2109573737]
-stream = ExtResource("15_0i0ei")
-autoplay = true
-
 [node name="Timer" type="Timer" parent="GameManager" unique_id=80365269]
 wait_time = 30.0
 one_shot = true
 autostart = true
+
+[node name="AudioGameTheme" type="AudioStreamPlayer" parent="." unique_id=2109573737]
+stream = ExtResource("15_0i0ei")
+autoplay = true
 
 [node name="SubmissionArea" type="Area2D" parent="." unique_id=221692160]
 position = Vector2(-22, 22)
