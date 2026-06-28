@@ -29,6 +29,17 @@ var recipes = {
 # (rarely makes sense, avoid)
 # --- Private Onready ---
 @onready var game_timer: Timer = $GameTimer
+@onready var _audio_new_order: AudioStreamPlayer = $AudioNewOrder
+
+@onready var end_screen: Control = $"../CanvasLayer/EndScreen"
+@onready var label: Label = $"../CanvasLayer/EndScreen/Label"
+@onready var timer_label: Label = $"../CanvasLayer/TimerLabel"
+@onready var timer: Timer = $Timer
+
+
+
+
+
 # --- Public Attributes ---
 # --- Private Attributes ---
 var _score: float
@@ -74,11 +85,19 @@ func _create_new_order():
 	var new_order = Recipe.new()
 	var keys = recipes.keys()
 	var number = _rng.randi_range(0, 0)
+	var recipe_name = keys[number]
 	var recipe = recipes[keys[number]]
+	var recipe_data = recipes[recipe_name]
 	
 	new_order.set_recipe(recipe)
 	_orders.append(new_order)
+	_audio_new_order.play()
 	print("Created new Order!")
+	
+	var order_scene = preload("res://scenes/order.tscn").instantiate()
+	add_child(order_scene)
+	order_scene.set_order_text(recipe_name, recipe_data["ingredients"])
+	
 
 
 # --- Private Engine Methods---
@@ -94,35 +113,48 @@ func _process(delta: float) -> void:
 	if _passed_time >= _new_order_break:
 		_passed_time = _passed_time - _new_order_break
 		if randf() <= _new_order_likeliness:
-			_create_new_order()
+			#_create_new_order()
+			pass
 	_passed_time = _passed_time + delta
+	
+	var time_left = timer.time_left
+	timer_label.text = str(ceil(time_left))
+
 
 # --- Debug Methods ---
+	
+		
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			var areas = $"../SubmissionArea".get_overlapping_areas()
+
+			for area in areas:
+				if area.name == "DishContainerArea":
+					print("Submit Order")
+					var dish_container := area.get_parent() as DishContainer
+					submit_order(dish_container)
 
 
-func _on_game_timer_timeout() -> void:
+func _on_timer_timeout() -> void:
 	#Game Over
 	print("Evaluating Orders")
 	# Evaluate all finished orders
 	if not _finished_orders.is_empty() and not _orders.is_empty():
 		print("Orders are not empty")
 		for i in range(_finished_orders.size()):
+			if i > _orders.size():
+				break 
 			var order: Recipe = _orders[i]
 			var finished: Dictionary = _finished_orders[i]
 			
-			var a = order.ingredients.duplicate()
-			var b = finished["ingredients"].duplicate()
-
-			a.sort()
-			b.sort()
-
-			if a == b:
-				_score += 20
-				print("Ingredients are the same")
-			else:
-				_score -= 20
-				print("Ingredients are not the same")
-			
+			print(order.ingredients)
+			for ingredient in finished["ingredients"]:
+				print(ingredient.id)
+				for ing in order.ingredients:
+					if ingredient.id == ing:
+						_score += 20
+					
 			_score += order.acidity - abs(order.acidity - finished["acidity"])
 			print("After acidity: ", _score)
 			_score += order.sweetness - abs(order.sweetness - finished["sweetness"])
@@ -135,31 +167,8 @@ func _on_game_timer_timeout() -> void:
 			print("After bitterness: ", _score)
 			_score += order.umami - abs(order.umami - finished["umami"])
 			print("After umami: ", _score)
-			
-			for key_taste in order.key_taste:
-				var found = false
-				for group in finished["key_taste"]:
-					if key_taste in group:
-						found = true
-						break
-
-				if found:
-					print("Found Key Taste:", key_taste)
-					_score += 10
-				else:
-					print("Missing Key Taste:", key_taste)
-					_score -= 10
 					
 	print("Score: ", _score)
-
-		
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			var areas = $"../SubmissionArea".get_overlapping_areas()
-
-			for area in areas:
-				if area.name == "DishContainerArea":
-					print("Submit Order")
-					var dish_container := area.get_parent() as DishContainer
-					submit_order(dish_container)
+	end_screen.visible = true
+	label.text = str(_score)
+	get_tree().paused = true
