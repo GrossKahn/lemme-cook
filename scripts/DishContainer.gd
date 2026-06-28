@@ -1,4 +1,4 @@
-class_name DishContainer extends Node
+class_name DishContainer extends Node2D
 ## Brief class description
 ##
 ## Class description main body
@@ -28,9 +28,15 @@ var saltness = 0.0
 var bitterness = 0.0
 var umami = 0.0
 
+var key_tasteness = []
+
 var id: String
 # --- Private Attributes ---
 var _sprite: Sprite2D
+var _dragging = false
+var _offset = Vector2(0,0)
+var _heating = false
+var _last_time := 0.0
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -49,12 +55,29 @@ func setup(ingredient_id: String, texture: Texture2D, width: float, height: floa
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$DishContainerArea.input_event.connect(_on_input_event)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	var current_time = Time.get_ticks_msec() / 1000.0
+	
+	if current_time - _last_time >= 0.3:
+		_last_time = current_time
+		if _heating and heat <= 200:
+			heat += 5
+			print(heat)
+		else:
+			if heat > 0:
+				heat -= 1
+				print(heat)
+		
+	if _dragging:
+		global_position = get_global_mouse_position() + _offset
+		
+	
+		
+
 
 # --- Debug Methods ---
 func _input(event):
@@ -72,6 +95,17 @@ func _input(event):
 					print(ingredients)
 					
 					
+func _on_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_dragging = true
+			_offset = global_position - get_global_mouse_position()
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			_dragging = false
+
 func set_size(width: float, height: float) -> void:
 	var tex_size = _sprite.texture.get_size()
 
@@ -87,9 +121,19 @@ func updateTasteValues(ingredient) -> void:
 	saltness += ingredient.saltness
 	bitterness += ingredient.bitterness
 	umami += ingredient.umami
-	print(sweetness)
-	print(acidity)
-	print(sourness)
-	print(saltness)
-	print(bitterness)
-	print(umami)
+	key_tasteness.append(ingredient.key_taste)
+	
+
+
+
+func _on_dish_container_area_area_entered(area: Area2D) -> void:
+	if area.name == "Stove":
+		print("Increasing Heat")
+		_heating = true
+		
+
+
+func _on_dish_container_area_area_exited(area: Area2D) -> void:
+	if area.name == "Stove":
+		print("Decreasing Heat")
+		_heating = false

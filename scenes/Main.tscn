@@ -13,9 +13,41 @@
 [ext_resource type="PackedScene" uid="uid://bfs1q8dhesx16" path="res://scenes/stove.tscn" id="6_c01mt"]
 [ext_resource type="Texture2D" uid="uid://cqo3v6slmd4g7" path="res://assets/room/carpet-psx.jpg" id="7_bjd11"]
 [ext_resource type="PackedScene" uid="uid://b0v3kg3gys08c" path="res://scenes/GameManager.tscn" id="7_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://cjx55a6bnex2x" path="res://scenes/cutting_board.tscn" id="13_3p2gp"]
+[ext_resource type="PackedScene" uid="uid://7aok4q5bve4" path="res://scenes/knife.tscn" id="14_cvmbd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
+size = Vector2(86.5, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3stb6"]
+size = Vector2(122, 50)
 
 [node name="Node2D" type="Node2D" unique_id=1583293859]
 script = ExtResource("1_rarhs")
+
+[node name="IngredientList" type="Node2D" parent="." unique_id=1181223679]
+z_index = 10
+
+[node name="Tomato" parent="IngredientList" unique_id=2016581130 instance=ExtResource("1_elqb8")]
+position = Vector2(300, -150)
+
+[node name="Lettuce" parent="IngredientList" unique_id=1073637832 instance=ExtResource("1_elqb8")]
+position = Vector2(-300, 0)
+
+[node name="BunBottom" parent="IngredientList" unique_id=1923803838 instance=ExtResource("1_elqb8")]
+position = Vector2(-300, 100)
+
+[node name="BunTop" parent="IngredientList" unique_id=1850022086 instance=ExtResource("1_elqb8")]
+position = Vector2(-200, 0)
+
+[node name="Cheese" parent="IngredientList" unique_id=1396486154 instance=ExtResource("1_elqb8")]
+position = Vector2(-200, 100)
+
+[node name="PattyUncooked" parent="IngredientList" unique_id=725133447 instance=ExtResource("1_elqb8")]
+position = Vector2(-200, -100)
+
+[node name="Onion" parent="IngredientList" unique_id=1769680920 instance=ExtResource("1_elqb8")]
+position = Vector2(-300, -100)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=924065703]
 position = Vector2(9, -29)
@@ -97,23 +129,41 @@ scale = Vector2(2.349, 2.349)
 skew = 0.50440013
 texture = ExtResource("7_bjd11")
 
-[node name="DishContainer" parent="." unique_id=1063629412 instance=ExtResource("1_0bbpv")]
-position = Vector2(316, -156)
-
-[node name="Ingredient" parent="." unique_id=1073637832 instance=ExtResource("1_elqb8")]
-position = Vector2(-353, -175)
+[node name="Pan" parent="." unique_id=1063629412 instance=ExtResource("1_0bbpv")]
+position = Vector2(170, -152)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=164730218]
 
 [node name="Stove" parent="." unique_id=455412022 instance=ExtResource("6_c01mt")]
 position = Vector2(100, 71)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stove" unique_id=1728656186]
+position = Vector2(-1.25, -52.5)
+shape = SubResource("RectangleShape2D_uhay8")
+
 [node name="Kitchen" parent="." unique_id=943151925 instance=ExtResource("4_rarhs")]
 position = Vector2(-31, 14)
-
-[node name="Ingredient2" parent="." unique_id=2016581130 instance=ExtResource("1_elqb8")]
 
 [node name="Bridge" parent="." unique_id=1513341203 instance=ExtResource("5_vcsgt")]
 position = Vector2(319, -40)
 
+[node name="CuttingBoard" parent="." unique_id=1863444397 instance=ExtResource("13_3p2gp")]
+position = Vector2(-346, 71)
+
+[node name="Knife" parent="." unique_id=654393971 instance=ExtResource("14_cvmbd")]
+position = Vector2(-323, -47)
+
 [node name="GameManager" parent="." unique_id=207368279 instance=ExtResource("7_nxtc6")]
+
+[node name="GameTimer" type="Timer" parent="GameManager" unique_id=222038967]
+wait_time = 15.0
+autostart = true
+
+[node name="SubmissionArea" type="Area2D" parent="." unique_id=221692160]
+position = Vector2(-22, 22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubmissionArea" unique_id=760291539]
+position = Vector2(335, 131)
+shape = SubResource("RectangleShape2D_3stb6")
+
+[connection signal="timeout" from="GameManager/GameTimer" to="GameManager" method="_on_game_timer_timeout"]

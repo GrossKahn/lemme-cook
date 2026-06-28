@@ -38,9 +38,31 @@ var _sprite: Sprite2D
 
 # --- Private Engine Methods---
 
-
-func setup(ingredient_id: String, texture: Texture2D, width: float, height: float) -> void:
+func setup(
+	ingredient_id: String,
+	texture: Texture2D,
+	width: int,
+	height: int,
+	key_taste: Array[String],
+	sweetness: float,
+	acidity: float,
+	sourness: float,
+	saltness: float,
+	bitterness: float,
+	umami: float
+) -> void:
 	id = ingredient_id
+	
+	# --- Taste data speichern ---
+	self.key_taste = key_taste.duplicate()
+
+	self.sweetness = sweetness
+	self.acidity = acidity
+	self.sourness = sourness
+	self.saltness = saltness
+	self.bitterness = bitterness
+	self.umami = umami
+	
 	_sprite = Sprite2D.new()
 	_sprite.texture = texture
 	
@@ -48,7 +70,7 @@ func setup(ingredient_id: String, texture: Texture2D, width: float, height: floa
 	add_child(_sprite)
 	set_size(width, height)
 	$IngredientArea/CollisionShape2D.shape.extents = Vector2(width/2, height/2)
-	
+
 func set_sweetness(value: float) -> void:
 	sweetness = value
 	
@@ -103,13 +125,3 @@ func set_size(width: float, height: float) -> void:
 		height / tex_size.y
 	)
 	
-func set_recipe(recipe) -> void:
-	sweetness = recipe["sweetness"]
-	acidity = recipe["acidity"]
-	sourness = recipe["sourness"]
-	bitterness = recipe["bitterness"]
-	umami = recipe["umami"]
-	saltness = recipe["saltiness"]
-	var key_taste_raw = recipe["key_taste"]
-	for t in key_taste_raw:
-		key_taste.append(str(t))
