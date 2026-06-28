@@ -28,6 +28,7 @@ const CUT_LINE_EPSILON : float = 10.0 # used in func simplifyLineRDP // how deta
 # --- Public Onready ---
 # (rarely makes sense, avoid)
 # --- Private Onready ---
+@onready var _cutboard = $CuttingBoard
 # --- Public Attributes ---
 # --- Private Attributes ---
 
@@ -60,7 +61,6 @@ var _fracture_min_area = 50
 var _shard_min_area = 30
 var _fracture_num = 3
 
-
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -70,26 +70,38 @@ func _input(event: InputEvent) -> void:
 	
 	#this system works with 1 button (instead of 2 with right mouse button) -> makes it work on touch screens
 	if event is InputEventMouseButton:
-		if event.button_index == 1:
-			if _cut_line_enabled:
-				if event.is_released():
-					if _cut_line.visible:
-						endCutLine()
-						_cut_line_enabled = false
-						_cut_line.visible = false
-						_cut_line_last_end_point = Vector3.ZERO
-					else:
-						#simpleCut(get_global_mouse_position())
-						_cut_line_total_length = 0.0
-						_cut_line_points = []
-						_cut_line.clear_points()
-						_cut_line_start_direction = Vector2.ZERO
-						_cut_line_t = 0.0
-						_cut_line_enabled = false
-						_cut_line.visible = false
-			else:
-				if event.pressed:
-					_cut_line_enabled = true
+		if _cutboard.can_cut:
+
+			if event.button_index == 1:
+				if _cut_line_enabled:
+					if event.is_released():
+						if _cut_line.visible:
+							endCutLine()
+							_cut_line_enabled = false
+							_cut_line.visible = false
+							_cut_line_last_end_point = Vector3.ZERO
+						else:
+							#simpleCut(get_global_mouse_position())
+							_cut_line_total_length = 0.0
+							_cut_line_points = []
+							_cut_line.clear_points()
+							_cut_line_start_direction = Vector2.ZERO
+							_cut_line_t = 0.0
+							_cut_line_enabled = false
+							_cut_line.visible = false
+				else:
+					if event.pressed:
+						_cut_line_enabled = true
+
+		else:
+			_cut_line_total_length = 0.0
+			_cut_line_points = []
+			_cut_line.clear_points()
+			_cut_line_start_direction = Vector2.ZERO
+			_cut_line_t = 0.0
+			_cut_line_enabled = false
+			_cut_line.visible = false
+
 
 
 func simpleCut(pos : Vector2) -> void:
@@ -265,7 +277,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 
 	if _cut_line_enabled:
-		var cur_pos : Vector2 = get_global_mouse_position()
+		var cur_pos : Vector2 = get_local_mouse_position()
 		if _cut_line_t < 1.0:
 			_cut_line_t += delta * (1.0 / CUT_LINE_STATIONARY_DELAY)
 		_calculateCutLine(cur_pos, _cut_line_t)

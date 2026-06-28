@@ -13,8 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://bfs1q8dhesx16" path="res://scenes/stove.tscn" id="6_c01mt"]
 [ext_resource type="Texture2D" uid="uid://cqo3v6slmd4g7" path="res://assets/room/carpet-psx.jpg" id="7_bjd11"]
 [ext_resource type="PackedScene" uid="uid://b0v3kg3gys08c" path="res://scenes/GameManager.tscn" id="7_nxtc6"]
-[ext_resource type="PackedScene" uid="uid://cjx55a6bnex2x" path="res://scenes/cutting_board.tscn" id="13_3p2gp"]
 [ext_resource type="PackedScene" uid="uid://7aok4q5bve4" path="res://scenes/knife.tscn" id="14_cvmbd"]
+[ext_resource type="PackedScene" uid="uid://bebq5vqhcypve" path="res://scenes/minigame/cuttinggame.tscn" id="14_ft6cd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
 size = Vector2(86.5, 31)
@@ -25,28 +25,28 @@ size = Vector2(122, 50)
 [node name="Node2D" type="Node2D" unique_id=1583293859]
 script = ExtResource("1_rarhs")
 
-[node name="Node2D" type="Node2D" parent="." unique_id=924065703]
+[node name="RoomSprites" type="Node2D" parent="." unique_id=924065703]
 position = Vector2(9, -29)
 
-[node name="FloorBottom" type="Sprite2D" parent="Node2D" unique_id=1767043049]
+[node name="FloorBottom" type="Sprite2D" parent="RoomSprites" unique_id=1767043049]
 position = Vector2(-8.114289, 225.61649)
 scale = Vector2(10.638208, 7.490393)
 skew = -0.5061455
 texture = ExtResource("2_jlsqs")
 
-[node name="WallRightBottom" type="Sprite2D" parent="Node2D" unique_id=1260258327]
+[node name="WallRightBottom" type="Sprite2D" parent="RoomSprites" unique_id=1260258327]
 position = Vector2(384.00003, -163.00005)
 rotation = 1.5707964
 scale = Vector2(8.085385, 6.8432508)
 skew = 1.0471975
 texture = ExtResource("3_lhr70")
 
-[node name="FloorBottomFront" type="Sprite2D" parent="Node2D" unique_id=981607987]
+[node name="FloorBottomFront" type="Sprite2D" parent="RoomSprites" unique_id=981607987]
 position = Vector2(-174.99998, 716)
 scale = Vector2(10.5567255, 10.556726)
 texture = ExtResource("2_jlsqs")
 
-[node name="backgroundtiles" type="Sprite2D" parent="Node2D" unique_id=118255380]
+[node name="backgroundtiles" type="Sprite2D" parent="RoomSprites" unique_id=118255380]
 texture_repeat = 2
 position = Vector2(-408.21362, -261.50003)
 scale = Vector2(2.9427083, 2.9427083)
@@ -54,62 +54,62 @@ texture = ExtResource("4_lhr70")
 region_enabled = true
 region_rect = Rect2(0, 0, 512, 256)
 
-[node name="FloorRoof" type="Sprite2D" parent="Node2D" unique_id=1317644104]
+[node name="FloorRoof" type="Sprite2D" parent="RoomSprites" unique_id=1317644104]
 position = Vector2(-164, -509.99988)
 scale = Vector2(10.638208, 7.4903936)
 skew = -0.5061456
 texture = ExtResource("2_jlsqs")
 
-[node name="Window" type="Sprite2D" parent="Node2D" unique_id=1518193633]
+[node name="Window" type="Sprite2D" parent="RoomSprites" unique_id=1518193633]
 position = Vector2(403.11603, -62.828888)
 rotation = -4.7088985
 scale = Vector2(2.2454052, 2.2454052)
 skew = 1.0471976
 texture = ExtResource("5_wp0k4")
 
-[node name="lamp" type="Sprite2D" parent="Node2D" unique_id=1447823461]
+[node name="lamp" type="Sprite2D" parent="RoomSprites" unique_id=1447823461]
 position = Vector2(-335, -159.00002)
 scale = Vector2(1.905, 1.905)
 texture = ExtResource("5_lhr70")
 
-[node name="lamp2" type="Sprite2D" parent="Node2D" unique_id=847410126]
+[node name="lamp2" type="Sprite2D" parent="RoomSprites" unique_id=847410126]
 position = Vector2(241, -132)
 rotation = 3.1415927
 scale = Vector2(-2.0659342, -2.0659342)
 texture = ExtResource("5_lhr70")
 
-[node name="WallRoof" type="Sprite2D" parent="Node2D" unique_id=1905010841]
+[node name="WallRoof" type="Sprite2D" parent="RoomSprites" unique_id=1905010841]
 position = Vector2(410, -683.00006)
 rotation = 1.5707965
 scale = Vector2(8.085384, 6.84325)
 skew = 1.0471975
 texture = ExtResource("3_lhr70")
 
-[node name="FloorRoofFront" type="Sprite2D" parent="Node2D" unique_id=487201142]
+[node name="FloorRoofFront" type="Sprite2D" parent="RoomSprites" unique_id=487201142]
 position = Vector2(-158, -226)
 scale = Vector2(10.5567255, 10.556726)
 texture = ExtResource("2_jlsqs")
 region_enabled = true
 region_rect = Rect2(0, 71, 120, 6)
 
-[node name="WallRightFront" type="Sprite2D" parent="Node2D" unique_id=1687534944]
+[node name="WallRightFront" type="Sprite2D" parent="RoomSprites" unique_id=1687534944]
 position = Vector2(1064.9999, 50.99997)
 rotation = 1.5707965
 scale = Vector2(9.4916525, 9.491653)
 texture = ExtResource("3_lhr70")
 
-[node name="Carpet" type="Sprite2D" parent="Node2D" unique_id=1437896497]
+[node name="Carpet" type="Sprite2D" parent="RoomSprites" unique_id=1437896497]
 position = Vector2(-270.00003, 210.00002)
 rotation = 1.0629056
 scale = Vector2(2.349, 2.349)
 skew = 0.50440013
 texture = ExtResource("7_bjd11")
 
+[node name="cutgame" parent="." unique_id=2047674977 instance=ExtResource("14_ft6cd")]
+position = Vector2(-372, 75)
+
 [node name="DishContainer" parent="." unique_id=1063629412 instance=ExtResource("1_0bbpv")]
 position = Vector2(316, -156)
-
-[node name="Ingredient" parent="." unique_id=1073637832 instance=ExtResource("1_elqb8")]
-position = Vector2(-353, -175)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=164730218]
 
@@ -128,8 +128,8 @@ position = Vector2(-31, 14)
 [node name="Bridge" parent="." unique_id=1513341203 instance=ExtResource("5_vcsgt")]
 position = Vector2(319, -40)
 
-[node name="CuttingBoard" parent="." unique_id=1863444397 instance=ExtResource("13_3p2gp")]
-position = Vector2(-346, 71)
+[node name="Ingredient" parent="." unique_id=1073637832 instance=ExtResource("1_elqb8")]
+position = Vector2(-353, -175)
 
 [node name="Knife" parent="." unique_id=654393971 instance=ExtResource("14_cvmbd")]
 position = Vector2(-323, -47)

@@ -17,6 +17,8 @@ class_name Ingredient extends Polygon2D
 # --- Private Onready ---
 
 @onready var _area: Area2D = $IngredientArea
+
+
 # --- Public Attributes ---
 var id: String
 var key_taste: Array[String]
@@ -35,6 +37,10 @@ var _offset = Vector2(0,0)
 
 var _sprite: Sprite2D
 var _polygon2d: Polygon2D = self
+
+
+var _cutboard
+
 # --- Public Methods ---
 
 func spawn_ingredient(texture:Texture2D, poly:PackedVector2Array,texture_info : Dictionary,global_pos,global_rot,modulate) -> void:
@@ -154,6 +160,8 @@ func set_key_taste(value: String) -> void:
 func _ready() -> void:
 	#setup("tomato",load("res://tomato.png"),0,0)
 	$IngredientArea.input_event.connect(_on_input_event)
+	if get_parent():
+		_cutboard = get_parent()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
