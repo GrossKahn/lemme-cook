@@ -14,26 +14,15 @@ class_name GameManager extends Node
 
 var recipes = {
 	"Nudeln mit Pesto": {
-		"key_taste": ["herbal", "savory", "rich"],
-		"ingredients": ["noodles", "pesto"],
-		"sweetness": 0.2,
-		"sourness": 0.0,
-		"acidity": 0.3,
-		"saltiness": 0.7,
-		"bitterness": 0.4,
-		"umami": 0.6
-	},
-
-	"Pizza": {
-		"key_taste": ["savory", "cheesy", "tomato"],
-		"ingredients": ["dough", "tomato", "cheese"],
-		"sweetness": 0.4,
-		"sourness": 0.0,
-		"acidity": 0.6,
-		"saltiness": 0.7,
-		"bitterness": 0.1,
-		"umami": 0.8
-	},
+		"key_taste": ["patty_uncooked", "tomato", "onion", "lettuce", "bun_top", "bun_bottom", "cheese"],
+		"ingredients": ["patty_uncooked", "tomato", "onion", "lettuce", "bun_top", "bun_bottom", "cheese"],
+		"sweetness": 2.4,
+		"sourness": 1.7,
+		"acidity": 2.1,
+		"saltiness": 2.4,
+		"bitterness": 1.3,
+		"umami": 3.3
+	}
 	
 }
 # --- Public Onready ---
@@ -76,8 +65,6 @@ func submit_order(order: DishContainer):
 	order.bitterness = 0.0
 	order.umami = 0.0
 	order.sourness = 0.0
-	for o in _finished_orders:
-		print(o.ingredients)
 	
 	
 	
@@ -86,13 +73,12 @@ func submit_order(order: DishContainer):
 func _create_new_order():
 	var new_order = Recipe.new()
 	var keys = recipes.keys()
-	var number = _rng.randi_range(0, 1)
+	var number = _rng.randi_range(0, 0)
 	var recipe = recipes[keys[number]]
-	print(recipe)
 	
 	new_order.set_recipe(recipe)
-	print(new_order.key_taste)
 	_orders.append(new_order)
+	print("Created new Order!")
 
 
 # --- Private Engine Methods---
@@ -115,31 +101,44 @@ func _process(delta: float) -> void:
 
 func _on_game_timer_timeout() -> void:
 	#Game Over
+	print("Evaluating Orders")
 	# Evaluate all finished orders
 	if not _finished_orders.is_empty() and not _orders.is_empty():
+		print("Orders are not empty")
 		for i in range(_finished_orders.size()):
 			var order: Recipe = _orders[i]
 			var finished: Dictionary = _finished_orders[i]
 
 			if order.ingredients == finished["ingredients"]:
 				_score += 20
+				print("Ingredients are the same")
 			else:
 				_score -= 20
+				print("Ingredients are not the same")
 			
 			_score += order.acidity - abs(order.acidity - finished["acidity"])
+			print("After acidity: ", _score)
 			_score += order.sweetness - abs(order.sweetness - finished["sweetness"])
+			print("After sweetness: ", _score)
 			_score += order.saltness - abs(order.saltness - finished["saltiness"])
+			print("After saltiness: ", _score)
 			_score += order.sourness - abs(order.sourness - finished["sourness"])
+			print("After sourness: ", _score)
 			_score += order.bitterness - abs(order.bitterness - finished["bitterness"])
+			print("After bitterness: ", _score)
 			_score += order.umami - abs(order.umami - finished["umami"])
+			print("After umami: ", _score)
 			
 			for key_taste in order.key_taste:
 				if finished["key_taste"].has(key_taste):
+					print("Found Key Taste")
 					_score += 10
 				else:
+					print("Did not find key Taste")
 					_score -= 10
 					
 	print("Score: ", _score)
+	get_tree().quit()
 	
 	
 

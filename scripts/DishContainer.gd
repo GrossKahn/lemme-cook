@@ -122,12 +122,6 @@ func updateTasteValues(ingredient) -> void:
 	bitterness += ingredient.bitterness
 	umami += ingredient.umami
 	key_tasteness.append(ingredient.key_taste)
-	print(sweetness)
-	print(acidity)
-	print(sourness)
-	print(saltness)
-	print(bitterness)
-	print(umami)
 	
 
 
