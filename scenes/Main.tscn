@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bfs1q8dhesx16" path="res://scenes/stove.tscn" id="6_c01mt"]
 [ext_resource type="Texture2D" uid="uid://cqo3v6slmd4g7" path="res://assets/room/carpet-psx.jpg" id="7_bjd11"]
 [ext_resource type="PackedScene" uid="uid://b0v3kg3gys08c" path="res://scenes/GameManager.tscn" id="7_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://q8fuq20cxdob" path="res://scenes/order.tscn" id="14_mwfav"]
 
 [node name="Node2D" type="Node2D" unique_id=1583293859]
 script = ExtResource("1_rarhs")
@@ -117,3 +118,5 @@ position = Vector2(-31, 14)
 position = Vector2(319, -40)
 
 [node name="GameManager" parent="." unique_id=207368279 instance=ExtResource("7_nxtc6")]
+
+[node name="Order" parent="." unique_id=34912610 instance=ExtResource("14_mwfav")]
