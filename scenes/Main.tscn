@@ -19,6 +19,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
 size = Vector2(86.5, 31)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3stb6"]
+size = Vector2(122, 50)
+
 [node name="Node2D" type="Node2D" unique_id=1583293859]
 script = ExtResource("1_rarhs")
 
@@ -132,3 +135,16 @@ position = Vector2(-346, 71)
 position = Vector2(-323, -47)
 
 [node name="GameManager" parent="." unique_id=207368279 instance=ExtResource("7_nxtc6")]
+
+[node name="GameTimer" type="Timer" parent="GameManager" unique_id=222038967]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="SubmissionArea" type="Area2D" parent="." unique_id=221692160]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubmissionArea" unique_id=760291539]
+position = Vector2(335, 131)
+shape = SubResource("RectangleShape2D_3stb6")
+
+[connection signal="timeout" from="GameManager/GameTimer" to="GameManager" method="_on_game_timer_timeout"]

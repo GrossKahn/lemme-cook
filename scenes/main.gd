@@ -45,7 +45,7 @@ class Dish:
 func _ready() -> void:
 	$Ingredient2.setup("tomaaaaaaaaaaaaaato", load("res://tomato.png"), 200, 200)
 	$Ingredient.setup("tomato", load("res://tomato.png"), 100, 100)
-	$DishContainer.setup("pan", load("res://pan.png"), 100, 100)
+	$DishContainer.setup("pan", load("res://assets/appliance/pan.png"), 100, 100)
 	$Ingredient.set_acidity(5)
 	$Ingredient.set_sweetness(2)
 	$Ingredient.set_saltness(-2)
