@@ -13,6 +13,11 @@ class_name DishContainer extends Node2D
 # --- Private Exports ---
 # --- Public Onready ---
 # (rarely makes sense, avoid)
+# --- Private Onready ---
+@onready var cook_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+
+
 # --- Public Attributes ---
 var heat = 0.0
 var is_boiling = false
@@ -37,11 +42,6 @@ var _offset = Vector2(0,0)
 var _heating = false
 var _last_time := 0.0
 var _sizzling = true
-var _oven_done_played = false
-@onready var _audio_pick_up: AudioStreamPlayer2D = $AudioPickUp
-@onready var _audio_leave_item: AudioStreamPlayer2D = $AudioLeaveItem
-@onready var _audio_sizzling: AudioStreamPlayer2D = $AudioSizzling
-@onready var _audio_oven_end: AudioStreamPlayer2D = $AudioOvenEnd
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -74,15 +74,10 @@ func _process(delta: float) -> void:
 			print(heat)
 			
 			check_for_patty()
-			if heat >= 200 and not _oven_done_played:
-				_audio_oven_end.play()
-				_oven_done_played = true
 		else:
 			if heat > 0:
 				heat -= 1
 				print(heat)
-				if heat < 100:
-					_oven_done_played = false
 		
 	if _dragging:
 		global_position = get_global_mouse_position() + _offset
@@ -108,7 +103,7 @@ func check_for_patty() -> void:
 			
 		if ingredient.id == "patty_uncooked":
 			if _sizzling:
-				_audio_sizzling.play()
+				cook_sound.play()
 			_sizzling = false
 			
 			var t = clamp(heat / 200.0, 0.0, 1.0)
@@ -135,22 +130,17 @@ func _input(event):
 					updateTasteValues(ingredient)
 
 					print("Ingredient eingesammelt:", ingredient.id)
-					_audio_leave_item.play()
-					print(ingredients)
 					
 					
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			_audio_pick_up.play()
 			_dragging = true
 			_offset = global_position - get_global_mouse_position()
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			if _dragging:
-				_audio_leave_item.play()
 			_dragging = false
 
 func set_size(width: float, height: float) -> void:
@@ -176,7 +166,6 @@ func updateTasteValues(ingredient) -> void:
 func _on_dish_container_area_area_entered(area: Area2D) -> void:
 	if area.name == "Stove":
 		print("Increasing Heat")
-		_audio_sizzling.play()
 		_heating = true
 		
 
@@ -184,5 +173,4 @@ func _on_dish_container_area_area_entered(area: Area2D) -> void:
 func _on_dish_container_area_area_exited(area: Area2D) -> void:
 	if area.name == "Stove":
 		print("Decreasing Heat")
-		_audio_sizzling.stop()
 		_heating = false

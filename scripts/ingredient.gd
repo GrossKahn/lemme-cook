@@ -44,8 +44,6 @@ var _polygon2d: Polygon2D = self
 
 var _cutboard
 
-@onready var _audio_pick_up: AudioStreamPlayer2D = $AudioPickUp
-@onready var _audio_leave_item: AudioStreamPlayer2D = $AudioLeaveItem
 # --- Public Methods ---
 #only call this to create a cut version of an ingredient
 func spawn_ingredient(texture:Texture2D, poly:PackedVector2Array,texture_info : Dictionary,global_pos,global_rot,mod, ingredient_dict) -> void:
@@ -220,15 +218,12 @@ func _process(delta: float) -> void:
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			_audio_pick_up.play()
 			_dragging = true
 			_offset = global_position - get_global_mouse_position()
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			if _dragging:
-				_audio_leave_item.play()
 			_dragging = false
 # --- Debug Methods ---
 
