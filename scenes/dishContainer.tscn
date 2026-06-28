@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cmuo62w0syth3"]
 
 [ext_resource type="Script" uid="uid://dmc4oqgamimhp" path="res://scripts/DishContainer.gd" id="1_f02qf"]
+[ext_resource type="AudioStream" uid="uid://debbim35exlfh" path="res://sounds/sizzling.mp3" id="2_7lmm8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7684"]
 size = Vector2(121, 122)
@@ -12,6 +13,10 @@ script = ExtResource("1_f02qf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DishContainerArea" unique_id=135451957]
 shape = SubResource("RectangleShape2D_d7684")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=654604599]
+stream = ExtResource("2_7lmm8")
+volume_db = 12.0
 
 [connection signal="area_entered" from="DishContainerArea" to="." method="_on_dish_container_area_area_entered"]
 [connection signal="area_exited" from="DishContainerArea" to="." method="_on_dish_container_area_area_exited"]

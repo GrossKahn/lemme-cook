@@ -36,6 +36,10 @@ class Dish:
 # --- Private Attributes ---
 
 # --- Public Methods ---
+
+func get_ingredient_root():
+	return $IngredientList
+
 # --- Private Methods ---
 
 
@@ -45,7 +49,7 @@ class Dish:
 func _ready() -> void:
 	$IngredientList/Tomato.setup(
 		"tomato",
-		load("res://assets/ingredients/Tomato.png"),
+		load("res://assets/ingredients/tomato-psx.png"),
 		100, 100,
 		["tomato"] as Array[String],
 		0.2, 0.7, 0.3, 0.1, 0.1, 0.5
@@ -53,7 +57,7 @@ func _ready() -> void:
 
 	$IngredientList/Lettuce.setup(
 		"lettuce",
-		load("res://assets/ingredients/Lettuce.png"),
+		load("res://assets/ingredients/lettuce-psx.png"),
 		100, 100,
 		["lettuce"] as Array[String],
 		0.3, 0.2, 0.2, 0.1, 0.1, 0.1
@@ -61,7 +65,7 @@ func _ready() -> void:
 
 	$IngredientList/BunBottom.setup(
 		"bun_bottom",
-		load("res://assets/ingredients/Bun Bottom.png"),
+		load("res://assets/ingredients/bun-bot-psx.png"),
 		100, 100,
 		["bun_bottom", "bread"] as Array[String],
 		0.6, 0.2, 0.1, 0.5, 0.1, 0.4
@@ -69,7 +73,7 @@ func _ready() -> void:
 
 	$IngredientList/BunTop.setup(
 		"bun_top",
-		load("res://assets/ingredients/Bun Top.png"),
+		load("res://assets/ingredients/bun-top-psx.png"),
 		100, 100,
 		["bun_top", "bread"] as Array[String],
 		0.6, 0.2, 0.1, 0.5, 0.1, 0.4
@@ -77,7 +81,7 @@ func _ready() -> void:
 
 	$IngredientList/Cheese.setup(
 		"cheese",
-		load("res://assets/ingredients/Cheese.png"),
+		load("res://assets/ingredients/cheese-psx.png"),
 		100, 100,
 		["cheese"] as Array[String],
 		0.3, 0.1, 0.1, 0.6, 0.1, 0.8
@@ -85,7 +89,7 @@ func _ready() -> void:
 
 	$IngredientList/PattyUncooked.setup(
 		"patty_uncooked",
-		load("res://assets/ingredients/Patty Uncooked.png"),
+		load("res://assets/ingredients/patty-uncooked-psx.png"),
 		100, 100,
 		["meat", "patty_uncooked"] as Array[String],
 		0.2, 0.1, 0.1, 0.4, 0.2, 0.9
@@ -93,7 +97,7 @@ func _ready() -> void:
 
 	$IngredientList/Onion.setup(
 		"onion",
-		load("res://assets/ingredients/Onion.png"),
+		load("res://assets/ingredients/onion-psx.png"),
 		100, 100,
 		["onion"] as Array[String],
 		0.2, 0.6, 0.8, 0.2, 0.6, 0.2

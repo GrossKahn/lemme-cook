@@ -14,6 +14,8 @@ class_name DishContainer extends Node2D
 # --- Public Onready ---
 # (rarely makes sense, avoid)
 # --- Private Onready ---
+@onready var cook_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 
 
 # --- Public Attributes ---
@@ -30,6 +32,8 @@ var umami = 0.0
 
 var key_tasteness = []
 
+var darkness = 1.0
+
 var id: String
 # --- Private Attributes ---
 var _sprite: Sprite2D
@@ -37,6 +41,7 @@ var _dragging = false
 var _offset = Vector2(0,0)
 var _heating = false
 var _last_time := 0.0
+var _sizzling = true
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -67,6 +72,8 @@ func _process(delta: float) -> void:
 		if _heating and heat <= 200:
 			heat += 5
 			print(heat)
+			
+			check_for_patty()
 		else:
 			if heat > 0:
 				heat -= 1
@@ -78,6 +85,29 @@ func _process(delta: float) -> void:
 	
 		
 
+func check_for_patty() -> void:
+	for ingredient in ingredients:
+		if ingredient.id == "patty_uncooked" and heat > 150:
+			ingredient.setup("cooked_patty",
+			load("res://assets/ingredients/patty-cooked-psx.png"), 
+			100,
+			100,
+			["meat", "cooked"] as Array[String],
+			ingredient.sweetness,
+			ingredient.acidity,
+			ingredient.sourness,
+			ingredient.saltness,
+			ingredient.bitterness,
+			ingredient.umami)
+			ingredient._polygon2d.color = Color(1.0, 1.0, 1.0)
+			
+		if ingredient.id == "patty_uncooked":
+			if _sizzling:
+				cook_sound.play()
+			_sizzling = false
+			
+			var t = clamp(heat / 200.0, 0.0, 1.0)
+			ingredient._polygon2d.color = Color(1.0 - t, 1.0 - t, 1.0 - t)
 
 # --- Debug Methods ---
 func _input(event):
@@ -87,12 +117,19 @@ func _input(event):
 
 			for area in areas:
 				if area.name == "IngredientArea":
-					print("Ingredient eingesammelt")
-					var parent = area.get_parent()
-					ingredients.append(parent.id)
-					updateTasteValues(parent)
-					parent.queue_free()
-					print(ingredients)
+					var ingredient = area.get_parent()
+
+					# Zustand speichern
+					ingredient._container = self
+					ingredient._in_container = true
+
+					# in Container ziehen (Position bleibt gleich)
+					ingredient.reparent(self, true)
+
+					ingredients.append(ingredient)
+					updateTasteValues(ingredient)
+
+					print("Ingredient eingesammelt:", ingredient.id)
 					
 					
 func _on_input_event(viewport, event, shape_idx):

@@ -12,6 +12,8 @@ class_name Kitchen extends Area2D
 # --- Public Exports ---
 # --- Private Exports ---
 # --- Public Onready ---
+@onready var ingredient_list: Node2D = $"../IngredientList"
+
 # (rarely makes sense, avoid)
 # --- Private Onready ---
 # --- Public Attributes ---
@@ -42,10 +44,22 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 			$AudioOpenClose.play()
 			_lowpass_filter.cutoff_hz=20000
 			_is_open = false
+			var areas = $IsInFridgeArea.get_overlapping_areas()
+			for area in areas:
+				if area.name == "IngredientArea":
+					area.get_parent().visible = true
+				
+			
+			
+				
 		else:
 			$AudioOpenClose.play()
 			_lowpass_filter.cutoff_hz=600
 			_is_open = true
+			var areas = $IsInFridgeArea.get_overlapping_areas()
+			for area in areas:
+				if area.name == "IngredientArea":
+					area.get_parent().visible = false
 	
 
 
