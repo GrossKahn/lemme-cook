@@ -131,6 +131,7 @@ skew = 0.50440013
 texture = ExtResource("7_bjd11")
 
 [node name="Pan" parent="." unique_id=1063629412 instance=ExtResource("1_0bbpv")]
+z_index = 20
 position = Vector2(170, -152)
 
 [node name="cutgame" parent="." unique_id=2047674977 instance=ExtResource("14_ft6cd")]
@@ -164,7 +165,7 @@ position = Vector2(-323, -47)
 [node name="GameManager" parent="." unique_id=207368279 instance=ExtResource("7_nxtc6")]
 
 [node name="Timer" type="Timer" parent="GameManager" unique_id=80365269]
-wait_time = 10.0
+wait_time = 30.0
 one_shot = true
 autostart = true
 
@@ -210,5 +211,13 @@ offset_bottom = 338.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("16_cvmbd")
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=253434861]
+z_index = 200
+offset_left = 13.0
+offset_top = 3.0
+offset_right = 185.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 67
 
 [connection signal="timeout" from="GameManager/Timer" to="GameManager" method="_on_timer_timeout"]
