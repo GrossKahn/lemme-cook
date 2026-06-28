@@ -13,11 +13,6 @@ class_name DishContainer extends Node2D
 # --- Private Exports ---
 # --- Public Onready ---
 # (rarely makes sense, avoid)
-# --- Private Onready ---
-@onready var cook_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
-
-
 # --- Public Attributes ---
 var heat = 0.0
 var is_boiling = false
@@ -113,7 +108,7 @@ func check_for_patty() -> void:
 			
 		if ingredient.id == "patty_uncooked":
 			if _sizzling:
-				cook_sound.play()
+				_audio_sizzling.play()
 			_sizzling = false
 			
 			var t = clamp(heat / 200.0, 0.0, 1.0)
@@ -140,12 +135,7 @@ func _input(event):
 					updateTasteValues(ingredient)
 
 					print("Ingredient eingesammelt:", ingredient.id)
-					print("Ingredient eingesammelt")
 					_audio_leave_item.play()
-					var parent = area.get_parent()
-					ingredients.append(parent.id)
-					updateTasteValues(parent)
-					parent.queue_free()
 					print(ingredients)
 					
 					

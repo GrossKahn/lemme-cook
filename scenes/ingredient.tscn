@@ -4,10 +4,13 @@
 [ext_resource type="AudioStream" path="res://sounds/pick up item.mp3" id="2_mh66k"]
 [ext_resource type="AudioStream" path="res://sounds/leave item.mp3" id="3_kqlw0"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3stb6"]
+
 [node name="Ingredient" type="Polygon2D" unique_id=261107519]
 script = ExtResource("1_rcex7")
 
 [node name="IngredientArea" type="Area2D" parent="." unique_id=1695240604]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="IngredientArea" unique_id=430420291]
 shape = SubResource("RectangleShape2D_3stb6")
 
