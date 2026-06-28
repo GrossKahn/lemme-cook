@@ -36,6 +36,10 @@ class Dish:
 # --- Private Attributes ---
 
 # --- Public Methods ---
+
+func get_ingredient_root():
+	return $IngredientList
+
 # --- Private Methods ---
 
 

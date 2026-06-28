@@ -1,9 +1,9 @@
-[gd_scene format=2]
+[gd_scene format=3 uid="uid://bu7004g2nevgj"]
 
 [ext_resource type="Script" uid="uid://cjc2o5wj7t71d" path="res://polygon2d-fracture/CutShapeVisualizer.gd" id="1"]
 
-[node name="CutShapeVisualizer" type="Polygon2D"]
-modulate = Color( 1, 0.415686, 0.415686, 1 )
+[node name="CutShapeVisualizer" type="Polygon2D" unique_id=386970982]
+modulate = Color(1, 0.415686, 0.415686, 1)
 z_index = -10
-script = ExtResource( 1 )
-start_color = Color( 3, 3, 3, 1 )
+script = ExtResource("1")
+start_color = Color(3, 3, 3, 1)

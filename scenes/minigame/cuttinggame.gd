@@ -38,7 +38,6 @@ var _cur_fracture_color : Color = fracture_body_color
 
 
 @onready var polyFracture := PolygonFracture.new()
-@onready var _ingredient_parent := $IngredientParent
 @onready var _rng := RandomNumberGenerator.new()
 @onready var _cut_shape : PackedVector2Array = PolygonLib.createCirclePolygon(100.0, 1)
 @onready var _cut_line := $CutLine
@@ -61,6 +60,7 @@ var _fracture_min_area = 50
 var _shard_min_area = 30
 var _fracture_num = 3
 
+var _ingredient_parent
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -184,6 +184,7 @@ func cutSourcePolygons(cut_pos : Vector2, cut_shape : PackedVector2Array, cut_ro
 	var instance = _pool_cut_visualizer.getInstance()
 	instance.spawn(cut_pos, fade_speed)
 	instance.setPolygon(cut_shape)
+	#why tf does changing to local pos change nothing aaaahaheiharnseitnhraetinrhatei
 	
 	for source in _ingredient_parent.get_children():
 		var source_polygon : PackedVector2Array = source.get_polygon()
@@ -226,7 +227,7 @@ func cutSourcePolygons(cut_pos : Vector2, cut_shape : PackedVector2Array, cut_ro
 			var mass : float = s_mass * area_p
 			var dir : Vector2 = (shape.spawn_pos - cut_pos).normalized()
 			
-			call_deferred("spawnCutIngredient", shape, source.modulate, s_lin_vel + dir * cut_force, s_ang_vel, mass, cut_pos, source.getTextureInfo())
+			call_deferred("spawnCutIngredient", shape, source.modulate, s_lin_vel + dir * cut_force, s_ang_vel, mass, cut_pos, source.getTextureInfo(),source.get_ingredient_details())
 		
 		source.queue_free()
 
@@ -246,7 +247,7 @@ func spawnFractureBody(fracture_shard : Dictionary, texture_info : Dictionary, n
 
 
 	#TODO: Anpassen zum spawnen von geschnittenen ingredient teilen
-func spawnCutIngredient(shape_info : Dictionary, color : Color, lin_vel : Vector2, ang_vel : float, mass : float, cut_pos : Vector2, texture_info : Dictionary) -> void:
+func spawnCutIngredient(shape_info : Dictionary, color : Color, lin_vel : Vector2, ang_vel : float, mass : float, cut_pos : Vector2, texture_info : Dictionary,details) -> void:
 	var instance:Ingredient = ingredient_scene.instantiate()
 	_ingredient_parent.add_child(instance)
 
@@ -255,7 +256,7 @@ func spawnCutIngredient(shape_info : Dictionary, color : Color, lin_vel : Vector
 	var rot = shape_info.spawn_rot
 	var poly =shape_info.centered_shape
 
-	instance.spawn_ingredient(texture.texture, poly,texture_info,pos,rot,color)
+	instance.spawn_ingredient(texture.texture, poly,texture_info,pos,rot,color,details)
 
 # --- Private Engine Methods---
 
@@ -263,6 +264,7 @@ func spawnCutIngredient(shape_info : Dictionary, color : Color, lin_vel : Vector
 func _ready() -> void:
 	_rng.randomize()
 	
+	_ingredient_parent = get_parent().get_ingredient_root()
 	var color := Color.WHITE
 	color.s = fracture_body_color.s
 	color.v = fracture_body_color.v
@@ -272,12 +274,12 @@ func _ready() -> void:
 	
 	_cut_line.clear_points()
 	_cut_line.visible = false
-
+ 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 
 	if _cut_line_enabled:
-		var cur_pos : Vector2 = get_local_mouse_position()
+		var cur_pos : Vector2 = get_global_mouse_position()
 		if _cut_line_t < 1.0:
 			_cut_line_t += delta * (1.0 / CUT_LINE_STATIONARY_DELAY)
 		_calculateCutLine(cur_pos, _cut_line_t)
