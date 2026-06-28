@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://4ssbfnw5cpqn"
+path="res://.godot/imported/waiting to be cooked or waiting for something 5s.mp3-3d2448ad750f971179716d71a8d44c92.mp3str"
+
+[deps]
+
+source_file="res://sounds/waiting to be cooked or waiting for something 5s.mp3"
+dest_files=["res://.godot/imported/waiting to be cooked or waiting for something 5s.mp3-3d2448ad750f971179716d71a8d44c92.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
