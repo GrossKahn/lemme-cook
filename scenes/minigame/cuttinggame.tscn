@@ -10,6 +10,7 @@
 
 [node name="Node2D" type="Node2D" unique_id=2047674977]
 script = ExtResource("1_wk0fl")
+fracture_body_color = Color(1, 1, 1, 1)
 ingredient_template = ExtResource("2_ag6eu")
 
 [node name="Cuttingboard" type="Sprite2D" parent="." unique_id=181468454]
@@ -22,7 +23,7 @@ region_rect = Rect2(0, 97.98948, 80, 22.01052)
 [node name="Pool_CutVisualizer" parent="." unique_id=1633709248 instance=ExtResource("3_mrnj2")]
 placed_in_level = true
 instance_template = ExtResource("4_mrnj2")
-max_amount = 30
+max_amount = 50
 instantiate_new_on_empty = true
 keep_instances_in_tree = true
 
@@ -33,6 +34,7 @@ max_amount = 250
 keep_instances_in_tree = true
 
 [node name="CutLine" type="Line2D" parent="." unique_id=1068647110]
+width = 30.0
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -40,6 +42,8 @@ end_cap_mode = 2
 [node name="IngredientParent" type="Node2D" parent="." unique_id=406966577]
 
 [node name="IngredientTemplate" parent="IngredientParent" unique_id=107534703 instance=ExtResource("2_ag6eu")]
+position = Vector2(205.00002, -19.999996)
+scale = Vector2(2.0109656, 2.0282233)
 texture = ExtResource("5_i2hxx")
-polygon = PackedVector2Array(-55.892334, 187.71182, -10.242432, 341.78018, 374.92847, 347.48642, 352.10352, 7.9654236, -112.95471, 5.11232)
-uv = PackedVector2Array(-55.892334, 187.71182, -10.242432, 341.78018, 374.92847, 347.48642, 352.10352, 7.9654236, -112.95471, 5.11232)
+polygon = PackedVector2Array(26.400269, 230.40002, 74.40027, 237.6, 2.4002686, 321.6, 348.00037, 297.6, 316.8003, 187.20001, 364.8003, 165.6, 312.00037, 64.8, 244.8003, 112.8, 182.40039, 35.999996, 21.600342, 74.40001, 33.60034, 206.40002)
+uv = PackedVector2Array(-45.59973, 182.40001, 74.40027, 237.6, 2.4002686, 321.6, 348.00037, 297.6, 316.8003, 187.20001, 364.8003, 165.6, 312.00037, 64.8, 244.8003, 112.8, 182.40039, 35.999996, 21.600342, 74.40001, 33.60034, 206.40002)

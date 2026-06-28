@@ -53,6 +53,13 @@ var _cut_line_t : float = 0.0
 var _cut_line_last_end_point := Vector3.ZERO #z is used as bool -> 0 = not a valid point/ 1 = valid point
 
 
+		# (....,cut_min_area,fracture_min_area,shard_min_area,fracture_num)
+#
+var _cut_min_area = 500
+var _fracture_min_area = 50
+var _shard_min_area = 30
+var _fracture_num = 3
+
 
 # --- Public Methods ---
 # --- Private Methods ---
@@ -65,14 +72,14 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == 1:
 			if _cut_line_enabled:
-				if not event.pressed:
+				if event.is_released():
 					if _cut_line.visible:
 						endCutLine()
 						_cut_line_enabled = false
 						_cut_line.visible = false
 						_cut_line_last_end_point = Vector3.ZERO
 					else:
-						simpleCut(get_global_mouse_position())
+						#simpleCut(get_global_mouse_position())
 						_cut_line_total_length = 0.0
 						_cut_line_points = []
 						_cut_line.clear_points()
@@ -183,7 +190,14 @@ func cutSourcePolygons(cut_pos : Vector2, cut_shape : PackedVector2Array, cut_ro
 			s_mass = source.mass
 		
 		
-		var cut_fracture_info : Dictionary = polyFracture.cutFracture(source_polygon, cut_shape, source_trans, cut_trans, 5000, 3000, 250, 1)
+		# (....,cut_min_area,fracture_min_area,shard_min_area,fracture_num)
+		#returns a dictionary containing shapes and fractures 
+		#-> shapes is an array containing all shape infos generated -> the clipped shapes (the non overlapping areas of the source polygon and cut polygon) can be used for new source polygons
+		#-> fractures is an array containing all fracture infos generated -> the intersected shapes (the overlapping areas of the source polygon and cut polygon) and the shapes smaller than cut_min_area are fractured
+		#-> intersected shapes smaller than fracture_min_area are discarded
+		#-> fracture pieces smaller than shard_min_area are discarded
+
+		var cut_fracture_info : Dictionary = polyFracture.cutFracture(source_polygon, cut_shape, source_trans, cut_trans, _cut_min_area, _fracture_min_area, _shard_min_area, _fracture_num)
 		
 		if cut_fracture_info.shapes.size() <= 0 and cut_fracture_info.fractures.size() <= 0:
 			continue
@@ -226,7 +240,7 @@ func spawnRigibody2d(shape_info : Dictionary, color : Color, lin_vel : Vector2, 
 	instance.global_position = shape_info.spawn_pos
 	instance.global_rotation = shape_info.spawn_rot
 	instance.set_polygon(shape_info.centered_shape)
-	#instance.modulate = color
+	instance.modulate = color
 	#instance.linear_velocity = lin_vel
 	#instance.angular_velocity = ang_vel
 	#instance.mass = mass
