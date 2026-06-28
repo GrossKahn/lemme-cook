@@ -1,4 +1,4 @@
-class_name Ingredient extends Node2D
+class_name Ingredient extends Polygon2D
 ## Brief class description
 ##
 ## Class description main body
@@ -15,9 +15,16 @@ class_name Ingredient extends Node2D
 # --- Public Onready ---
 # (rarely makes sense, avoid)
 # --- Private Onready ---
+
+@onready var _area: Area2D = $IngredientArea
+
+
 # --- Public Attributes ---
 var id: String
 var key_taste: Array[String]
+
+var _in_container := false
+var _container: Node = null
 
 var sweetness = 0.0
 var acidity = 0.0
@@ -32,22 +39,144 @@ var _dragging = false
 var _offset = Vector2(0,0)
 
 var _sprite: Sprite2D
+var _polygon2d: Polygon2D = self
+
+
+var _cutboard
+
 # --- Public Methods ---
+#only call this to create a cut version of an ingredient
+func spawn_ingredient(texture:Texture2D, poly:PackedVector2Array,texture_info : Dictionary,global_pos,global_rot,mod, ingredient_dict) -> void:
+
+
+
+	global_position = global_pos
+	global_rotation = global_rot
+	modulate = mod
+
+	set_polygon(poly)
+
+	var collision_polygon = CollisionPolygon2D.new()
+	collision_polygon.polygon = poly
+
+	_area.add_child(collision_polygon)
+
+	_polygon2d.texture = texture_info.texture
+	_polygon2d.texture_scale = texture_info.scale
+	_polygon2d.texture_offset = texture_info.offset
+	_polygon2d.texture_rotation = texture_info.rot
+
+	ingredient_dict["id"] = "cut " + ingredient_dict["id"]
+	set_ingredient_details(ingredient_dict)
+	
+
+
+
+func getTextureInfo() -> Dictionary:
+	return {"texture" : _polygon2d.texture, "rot" : _polygon2d.texture_rotation, "offset" : _polygon2d.texture_offset, "scale" : _polygon2d.texture_scale}
 # --- Private Methods ---
+
+func _create_polygon_from_image(texture:Texture2D):
+
+	var bitmap = BitMap.new()
+	bitmap.create_from_image_alpha(texture.get_image())
+# Will cover the entire polygon
+	var polys = bitmap.opaque_to_polygons(Rect2(Vector2.ZERO, texture.get_size()))
+
+	#var final_polygon = PackedVector2Array()
+	#for p in polys:
+	#	final_polygon =  Geometry2D.merge_polygons(final_polygon,p)[0]
+
+	#return final_polygon
+	return polys
+
+func merge_all_polygons(polygons: Array[PackedVector2Array]) -> PackedVector2Array:
+	if polygons.is_empty():
+		return PackedVector2Array()
+
+	if polygons.size() == 1:
+		return polygons[0]
+
+	var final_polygon: PackedVector2Array = polygons[0]
+	for i in range(1, polygons.size()):
+		var result: Array[PackedVector2Array] = Geometry2D.merge_polygons(final_polygon, polygons[i])
+
+		# is_polygon_clockwise() returns false for outer boundaries, true for holes
+		for poly in result:
+			if not Geometry2D.is_polygon_clockwise(poly):
+				# This is an outer boundary — pick the largest one
+				#var area := _polygon_area(poly)
+				#if area > best_area:
+				#	best_area = area
+				#	best = poly
+				final_polygon = poly
+
+	return final_polygon 
+
 
 
 # --- Private Engine Methods---
+func set_ingredient_details(dict:Dictionary):
 
 
-func setup(ingredient_id: String, texture: Texture2D, width: float, height: float) -> void:
+	id = dict["id"] 
+	
+	# --- Taste data speichern ---
+	self.key_taste = key_taste.duplicate()
+
+	self.sweetness = dict["sweetness"]
+	self.acidity = dict["acidity"]
+	self.sourness = dict["sourness"]
+	self.saltness = dict["saltness"]
+	self.bitterness = dict["bitterness"]
+	self.umami = dict["umami"]
+
+func get_ingredient_details():
+
+
+	var dict = {"id":id,"texture":texture,"key_taste":key_taste,"sweetness":sweetness,"acidity":acidity,"sourness":sourness,"saltness":saltness,"bitterness":bitterness,"umami":umami}
+
+	return dict
+
+
+func setup(
+	ingredient_id: String,
+	texture: Texture2D,
+	width: int,
+	height: int,
+	key_taste: Array[String],
+	sweetness: float,
+	acidity: float,
+	sourness: float,
+	saltness: float,
+	bitterness: float,
+	umami: float
+) -> void:
+
+	var dict = {"id":ingredient_id,"texture":texture,"key_taste":key_taste,"sweetness":sweetness,"acidity":acidity,"sourness":sourness,"saltness":saltness,"bitterness":bitterness,"umami":umami}
+	set_ingredient_details(dict)
 	id = ingredient_id
-	_sprite = Sprite2D.new()
-	_sprite.texture = texture
 	
+	# --- Taste data speichern ---
+	#	self.key_taste = key_taste.duplicate()
+	#
+	#	self.sweetness = sweetness
+	#	self.acidity = acidity
+	#	self.sourness = sourness
+	#	self.saltness = saltness
+	#	self.bitterness = bitterness
+	#	self.umami = umami
 	
-	add_child(_sprite)
-	set_size(width, height)
-	$IngredientArea/CollisionShape2D.shape.extents = Vector2(width/2, height/2)
+	var new_polygon = merge_all_polygons(_create_polygon_from_image(texture))
+
+	self.set_polygon(new_polygon)
+	self.texture = texture
+	var collision_polygon = CollisionPolygon2D.new()
+	collision_polygon.polygon = new_polygon
+
+	_area.add_child(collision_polygon)
+
+	
 	
 func set_sweetness(value: float) -> void:
 	sweetness = value
@@ -70,14 +199,19 @@ func set_umami(value: float) -> void:
 func set_key_taste(value: String) -> void:
 	key_taste.append(value)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#setup("tomato",load("res://tomato.png"),0,0)
 	$IngredientArea.input_event.connect(_on_input_event)
+	if get_parent():
+		_cutboard = get_parent()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if _dragging:
+		try_drop_out()
 		global_position = get_global_mouse_position() + _offset
 
 
@@ -93,6 +227,11 @@ func _unhandled_input(event):
 			_dragging = false
 # --- Debug Methods ---
 
+func try_drop_out():
+	if _in_container and _dragging:
+		reparent(get_tree().current_scene, true)
+		_in_container = false
+		_container = null
 
 
 func set_size(width: float, height: float) -> void:
@@ -103,13 +242,3 @@ func set_size(width: float, height: float) -> void:
 		height / tex_size.y
 	)
 	
-func set_recipe(recipe) -> void:
-	sweetness = recipe["sweetness"]
-	acidity = recipe["acidity"]
-	sourness = recipe["sourness"]
-	bitterness = recipe["bitterness"]
-	umami = recipe["umami"]
-	saltness = recipe["saltiness"]
-	var key_taste_raw = recipe["key_taste"]
-	for t in key_taste_raw:
-		key_taste.append(str(t))
