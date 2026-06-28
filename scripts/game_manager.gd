@@ -33,6 +33,10 @@ var recipes = {
 
 @onready var end_screen: Control = $"../CanvasLayer/EndScreen"
 @onready var label: Label = $"../CanvasLayer/EndScreen/Label"
+@onready var timer_label: Label = $"../CanvasLayer/TimerLabel"
+@onready var timer: Timer = $Timer
+
+
 
 
 
@@ -112,6 +116,10 @@ func _process(delta: float) -> void:
 			#_create_new_order()
 			pass
 	_passed_time = _passed_time + delta
+	
+	var time_left = timer.time_left
+	timer_label.text = str(ceil(time_left))
+
 
 # --- Debug Methods ---
 	
@@ -135,6 +143,8 @@ func _on_timer_timeout() -> void:
 	if not _finished_orders.is_empty() and not _orders.is_empty():
 		print("Orders are not empty")
 		for i in range(_finished_orders.size()):
+			if i > _orders.size():
+				break 
 			var order: Recipe = _orders[i]
 			var finished: Dictionary = _finished_orders[i]
 			
