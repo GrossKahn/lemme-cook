@@ -86,6 +86,7 @@ func _create_new_order():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_rng.randomize()
+	_create_new_order()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -108,8 +109,14 @@ func _on_game_timer_timeout() -> void:
 		for i in range(_finished_orders.size()):
 			var order: Recipe = _orders[i]
 			var finished: Dictionary = _finished_orders[i]
+			
+			var a = order.ingredients.duplicate()
+			var b = finished["ingredients"].duplicate()
 
-			if order.ingredients == finished["ingredients"]:
+			a.sort()
+			b.sort()
+
+			if a == b:
 				_score += 20
 				print("Ingredients are the same")
 			else:
@@ -130,17 +137,20 @@ func _on_game_timer_timeout() -> void:
 			print("After umami: ", _score)
 			
 			for key_taste in order.key_taste:
-				if finished["key_taste"].has(key_taste):
-					print("Found Key Taste")
+				var found = false
+				for group in finished["key_taste"]:
+					if key_taste in group:
+						found = true
+						break
+
+				if found:
+					print("Found Key Taste:", key_taste)
 					_score += 10
 				else:
-					print("Did not find key Taste")
+					print("Missing Key Taste:", key_taste)
 					_score -= 10
 					
 	print("Score: ", _score)
-	get_tree().quit()
-	
-	
 
 		
 func _input(event):
