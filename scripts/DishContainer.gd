@@ -35,6 +35,8 @@ var id: String
 var _sprite: Sprite2D
 var _dragging = false
 var _offset = Vector2(0,0)
+var _heating = false
+var _last_time := 0.0
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -58,8 +60,24 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var current_time = Time.get_ticks_msec() / 1000.0
+	
+	if current_time - _last_time >= 0.3:
+		_last_time = current_time
+		if _heating and heat <= 200:
+			heat += 5
+			print(heat)
+		else:
+			if heat > 0:
+				heat -= 1
+				print(heat)
+		
 	if _dragging:
 		global_position = get_global_mouse_position() + _offset
+		
+	
+		
+
 
 # --- Debug Methods ---
 func _input(event):
@@ -110,3 +128,18 @@ func updateTasteValues(ingredient) -> void:
 	print(saltness)
 	print(bitterness)
 	print(umami)
+	
+
+
+
+func _on_dish_container_area_area_entered(area: Area2D) -> void:
+	if area.name == "Stove":
+		print("Increasing Heat")
+		_heating = true
+		
+
+
+func _on_dish_container_area_area_exited(area: Area2D) -> void:
+	if area.name == "Stove":
+		print("Decreasing Heat")
+		_heating = false
