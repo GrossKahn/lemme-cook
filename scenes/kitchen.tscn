@@ -15,6 +15,9 @@ streams_count = 2
 stream_0/stream = ExtResource("4_g3o0j")
 stream_1/stream = ExtResource("5_58u3k")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
+size = Vector2(167, 234)
+
 [node name="Kitchen" type="Area2D" unique_id=389405432]
 script = ExtResource("1_mrp8g")
 
@@ -29,7 +32,14 @@ hframes = 2
 [node name="AudioHum" type="AudioStreamPlayer2D" parent="." unique_id=756945986]
 stream = ExtResource("3_v3ycp")
 autoplay = true
-bus = &"Humming"
 
 [node name="AudioOpenClose" type="AudioStreamPlayer2D" parent="." unique_id=835978600]
 stream = SubResource("AudioStreamRandomizer_ibrlr")
+
+[node name="IsInFridgeArea" type="Area2D" parent="." unique_id=1166000666]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IsInFridgeArea" unique_id=1579582079]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_uhay8")
+
+[connection signal="area_entered" from="IsInFridgeArea" to="." method="_on_is_in_fridge_area_area_entered"]
