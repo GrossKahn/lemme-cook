@@ -156,7 +156,7 @@ position = Vector2(-323, -47)
 [node name="GameManager" parent="." unique_id=207368279 instance=ExtResource("7_nxtc6")]
 
 [node name="GameTimer" type="Timer" parent="GameManager" unique_id=222038967]
-wait_time = 15.0
+wait_time = 30.0
 autostart = true
 
 [node name="SubmissionArea" type="Area2D" parent="." unique_id=221692160]

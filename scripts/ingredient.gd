@@ -19,6 +19,9 @@ class_name Ingredient extends Node2D
 var id: String
 var key_taste: Array[String]
 
+var _in_container := false
+var _container: Node = null
+
 var sweetness = 0.0
 var acidity = 0.0
 var sourness = 0.0
@@ -100,6 +103,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if _dragging:
+		try_drop_out()
 		global_position = get_global_mouse_position() + _offset
 
 
@@ -115,6 +119,11 @@ func _unhandled_input(event):
 			_dragging = false
 # --- Debug Methods ---
 
+func try_drop_out():
+	if _in_container and _dragging:
+		reparent(get_tree().current_scene, true)
+		_in_container = false
+		_container = null
 
 
 func set_size(width: float, height: float) -> void:

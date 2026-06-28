@@ -13,9 +13,9 @@ class_name GameManager extends Node
 # --- Private Exports ---
 
 var recipes = {
-	"Nudeln mit Pesto": {
-		"key_taste": ["patty_uncooked", "tomato", "onion", "lettuce", "bun_top", "bun_bottom", "cheese"],
-		"ingredients": ["patty_uncooked", "tomato", "onion", "lettuce", "bun_top", "bun_bottom", "cheese"],
+	"Burger": {
+		"key_taste": ["cooked_patty", "tomato", "onion", "lettuce", "bun_top", "bun_bottom", "cheese"],
+		"ingredients": ["cooked_patty", "tomato", "onion", "lettuce", "bun_top", "bun_bottom", "cheese"],
 		"sweetness": 2.4,
 		"sourness": 1.7,
 		"acidity": 2.1,

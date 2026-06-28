@@ -67,6 +67,24 @@ func _process(delta: float) -> void:
 		if _heating and heat <= 200:
 			heat += 5
 			print(heat)
+			if heat >= 150 and ingredients.has("patty_uncooked"):
+				var index = ingredients.find("patty_uncooked")
+				
+
+				if index != -1:
+					print("Cooking Patty")
+					ingredients[index] = "cooked_patty"
+					
+				var replaced = false
+
+				for i in range(key_tasteness.size()):
+					for j in range(key_tasteness[i].size()):
+						if key_tasteness[i][j] == "patty_uncooked" and not replaced:
+							key_tasteness[i][j] = "cooked_patty"
+							replaced = true
+							break
+					
+			
 		else:
 			if heat > 0:
 				heat -= 1
@@ -87,12 +105,19 @@ func _input(event):
 
 			for area in areas:
 				if area.name == "IngredientArea":
-					print("Ingredient eingesammelt")
-					var parent = area.get_parent()
-					ingredients.append(parent.id)
-					updateTasteValues(parent)
-					parent.queue_free()
-					print(ingredients)
+					var ingredient = area.get_parent()
+
+					# Zustand speichern
+					ingredient._container = self
+					ingredient._in_container = true
+
+					# in Container ziehen (Position bleibt gleich)
+					ingredient.reparent(self, true)
+
+					ingredients.append(ingredient.id)
+					updateTasteValues(ingredient)
+
+					print("Ingredient eingesammelt:", ingredient.id)
 					
 					
 func _on_input_event(viewport, event, shape_idx):
