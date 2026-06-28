@@ -158,6 +158,7 @@ position = Vector2(319, -40)
 position = Vector2(-353, -175)
 
 [node name="Knife" parent="." unique_id=654393971 instance=ExtResource("14_cvmbd")]
+unique_name_in_owner = true
 position = Vector2(-323, -47)
 
 [node name="GameManager" parent="." unique_id=207368279 instance=ExtResource("7_nxtc6")]
