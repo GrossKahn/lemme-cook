@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b0v3kg3gys08c" path="res://scenes/GameManager.tscn" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://cjx55a6bnex2x" path="res://scenes/cutting_board.tscn" id="13_3p2gp"]
 [ext_resource type="PackedScene" uid="uid://7aok4q5bve4" path="res://scenes/knife.tscn" id="14_cvmbd"]
+[ext_resource type="AudioStream" path="res://sounds/Game Theme.mp3" id="15_0i0ei"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
 size = Vector2(86.5, 31)
@@ -158,6 +159,10 @@ position = Vector2(-323, -47)
 [node name="GameTimer" type="Timer" parent="GameManager" unique_id=222038967]
 wait_time = 15.0
 autostart = true
+
+[node name="AudioGameTheme" type="AudioStreamPlayer" parent="." unique_id=2109573737]
+stream = ExtResource("15_0i0ei")
+autoplay = true
 
 [node name="SubmissionArea" type="Area2D" parent="." unique_id=221692160]
 position = Vector2(-22, 22)

@@ -1,8 +1,14 @@
-[gd_scene format=3 uid="uid://bfs1q8dhesx16"]
+[gd_scene load_steps=3 format=3 uid="uid://bfs1q8dhesx16"]
 
 [ext_resource type="Texture2D" uid="uid://cho7ut02dm73k" path="res://assets/appliance/placeholder-stove-psx.jpg" id="1_bocw4"]
+[ext_resource type="Script" path="res://scripts/stove.gd" id="2_y84c6"]
+[ext_resource type="AudioStream" path="res://sounds/oven opening.mp3" id="3_xnmid"]
 
 [node name="Stove" type="Area2D" unique_id=455412022]
+script = ExtResource("2_y84c6")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=603588295]
 texture = ExtResource("1_bocw4")
+
+[node name="AudioOvenOpening" type="AudioStreamPlayer2D" parent="." unique_id=509665151]
+stream = ExtResource("3_xnmid")

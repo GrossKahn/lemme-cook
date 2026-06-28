@@ -8,6 +8,8 @@ class_name Kitchen extends Area2D
 
 # --- Signals ---
 # --- Constants ---
+const _FRIDGE_OPEN_SOUND = preload("res://assets/sound/fridge_open.mp3")
+const _FRIDGE_CLOSE_SOUND = preload("res://assets/sound/fridge-close.mp3")
 # --- Enums --- (uppercase, no policy on visibility)
 # --- Public Exports ---
 # --- Private Exports ---
@@ -39,10 +41,12 @@ func _process(delta: float) -> void:
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and not event.is_pressed():
 		if _is_open:
+			$AudioOpenClose.stream = _FRIDGE_CLOSE_SOUND
 			$AudioOpenClose.play()
 			_lowpass_filter.cutoff_hz=20000
 			_is_open = false
 		else:
+			$AudioOpenClose.stream = _FRIDGE_OPEN_SOUND
 			$AudioOpenClose.play()
 			_lowpass_filter.cutoff_hz=600
 			_is_open = true

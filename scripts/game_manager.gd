@@ -29,6 +29,7 @@ var recipes = {
 # (rarely makes sense, avoid)
 # --- Private Onready ---
 @onready var game_timer: Timer = $GameTimer
+@onready var _audio_new_order: AudioStreamPlayer = $AudioNewOrder
 # --- Public Attributes ---
 # --- Private Attributes ---
 var _score: float
@@ -78,6 +79,7 @@ func _create_new_order():
 	
 	new_order.set_recipe(recipe)
 	_orders.append(new_order)
+	_audio_new_order.play()
 	print("Created new Order!")
 
 
