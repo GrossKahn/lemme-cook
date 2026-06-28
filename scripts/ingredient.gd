@@ -41,6 +41,9 @@ var _offset = Vector2(0,0)
 var _sprite: Sprite2D
 var _polygon2d: Polygon2D = self
 
+var _am_i_mouse_captured: bool = false
+
+static var _mouse_captured: bool = false
 
 var _cutboard
 
@@ -219,17 +222,20 @@ func _process(delta: float) -> void:
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not _mouse_captured:
 			_audio_pick_up.play()
 			_dragging = true
+			_mouse_captured = true
+			_am_i_mouse_captured = true
 			_offset = global_position - get_global_mouse_position()
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and _am_i_mouse_captured:
 			if _dragging:
 				_audio_leave_item.play()
 			_dragging = false
+			_mouse_captured = false
 # --- Debug Methods ---
 
 func try_drop_out():
