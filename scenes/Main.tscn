@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://7aok4q5bve4" path="res://scenes/knife.tscn" id="14_cvmbd"]
 [ext_resource type="PackedScene" uid="uid://bebq5vqhcypve" path="res://scenes/minigame/cuttinggame.tscn" id="14_ft6cd"]
 [ext_resource type="PackedScene" uid="uid://d03rq1hisk5j5" path="res://scenes/ui/pause_menu.tscn" id="14_mwfav"]
+[ext_resource type="Texture2D" uid="uid://blm3b2axygnx0" path="res://assets/room/end_screen.png" id="16_cvmbd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
 size = Vector2(86.5, 31)
@@ -220,6 +221,7 @@ offset_right = 443.5
 offset_bottom = 338.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("16_cvmbd")
 
 [node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=253434861]
 z_index = 200

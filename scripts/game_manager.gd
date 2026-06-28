@@ -33,6 +33,7 @@ var recipes = {
 @onready var _audio_new_order: AudioStreamPlayer = $AudioNewOrder
 
 @onready var end_screen: Control = $"../CanvasLayer/EndScreen"
+
 @onready var label: Label = $"../CanvasLayer/EndScreen/Label"
 @onready var timer_label: Label = $"../CanvasLayer/TimerLabel"
 @onready var timer: Timer = $Timer
@@ -70,7 +71,9 @@ func submit_order(order: DishContainer):
 			"sourness": order.sourness,
 			"key_taste": order.key_tasteness.duplicate()
 		})
-	order.ingredients = []
+	for ingredient in order.ingredients:
+		if is_instance_valid(ingredient):
+			ingredient.visible = false
 	order.acidity = 0.0
 	order.saltness = 0.0
 	order.sweetness = 0.0
@@ -116,7 +119,7 @@ func _process(delta: float) -> void:
 # --- Debug Methods ---
 
 
-func _on_game_timer_timeout() -> void:
+func _on_timer_timeout() -> void:
 	#Game Over
 	print("Evaluating Orders")
 	# Evaluate all finished orders
@@ -128,19 +131,13 @@ func _on_game_timer_timeout() -> void:
 			var order: Recipe = _orders[i]
 			var finished: Dictionary = _finished_orders[i]
 			
-			var a = order.ingredients.duplicate()
-			var b = finished["ingredients"].duplicate()
-
-			a.sort()
-			b.sort()
-
-			if a == b:
-				_score += 20
-				print("Ingredients are the same")
-			else:
-				_score -= 20
-				print("Ingredients are not the same")
-			
+			print(order.ingredients)
+			for ingredient in finished["ingredients"]:
+				print(ingredient.id)
+				for ing in order.ingredients:
+					if ingredient.id == ing:
+						_score += 20
+					
 			_score += order.acidity - abs(order.acidity - finished["acidity"])
 			print("After acidity: ", _score)
 			_score += order.sweetness - abs(order.sweetness - finished["sweetness"])
@@ -153,22 +150,11 @@ func _on_game_timer_timeout() -> void:
 			print("After bitterness: ", _score)
 			_score += order.umami - abs(order.umami - finished["umami"])
 			print("After umami: ", _score)
-			
-			for key_taste in order.key_taste:
-				var found = false
-				for group in finished["key_taste"]:
-					if key_taste in group:
-						found = true
-						break
-
-				if found:
-					print("Found Key Taste:", key_taste)
-					_score += 10
-				else:
-					print("Missing Key Taste:", key_taste)
-					_score -= 10
 					
 	print("Score: ", _score)
+	end_screen.visible = true
+	label.text = str(_score)
+	get_tree().paused = true
 
 		
 func _input(event):
