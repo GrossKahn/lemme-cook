@@ -43,6 +43,7 @@ var _cur_fracture_color : Color = fracture_body_color
 @onready var _cut_line := $CutLine
 @onready var _pool_cut_visualizer := $Pool_CutVisualizer
 @onready var _pool_fracture_shards := $Pool_FractureShards
+@onready var _audio_cutting: AudioStreamPlayer2D = $AudioCutting
 
 
 var _cut_line_enabled : bool = false
@@ -76,6 +77,7 @@ func _input(event: InputEvent) -> void:
 			if event.button_index == 1:
 				if _cut_line_enabled:
 					if event.is_released():
+						_audio_cutting.play()
 						if _cut_line.visible:
 							endCutLine()
 							_cut_line_enabled = false

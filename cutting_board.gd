@@ -17,7 +17,7 @@ class_name CuttingBoard extends Node2D
 # --- Public Attributes ---
 var can_cut: bool
 # --- Private Attributes ---
-@onready var _audio_cutting: AudioStreamPlayer2D = $AudioCutting
+
 # --- Public Methods ---
 # --- Private Methods ---
 
@@ -39,7 +39,6 @@ func _process(delta: float) -> void:
 func _on_cutting_board_area_area_entered(area: Area2D) -> void:
 	if area.name == "KnifeArea":
 		print("Can Cut")
-		_audio_cutting.play()
 		can_cut = true
 
 

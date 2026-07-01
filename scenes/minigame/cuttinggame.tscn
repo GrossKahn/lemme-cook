@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bu7004g2nevgj" path="res://polygon2d-fracture/CutShapeVisualizer.tscn" id="4_mrnj2"]
 [ext_resource type="PackedScene" path="res://polygon2d-fracture/FractureShard.tscn" id="5_5qjvt"]
 [ext_resource type="PackedScene" uid="uid://vj0g2hergnvd" path="res://scenes/ingredient.tscn" id="7_5qjvt"]
+[ext_resource type="AudioStream" uid="uid://b1el4mnyl70my" path="res://sounds/cutting vegans.mp3" id="7_ag6eu"]
 
 [node name="CutRoot" type="Node2D" unique_id=2047674977]
 script = ExtResource("1_wk0fl")
@@ -37,3 +38,6 @@ end_cap_mode = 2
 [node name="IngredientParent" type="Node2D" parent="." unique_id=406966577]
 
 [node name="Ingredient" parent="IngredientParent" unique_id=261107519 instance=ExtResource("7_5qjvt")]
+
+[node name="AudioCutting" type="AudioStreamPlayer2D" parent="." unique_id=146472133]
+stream = ExtResource("7_ag6eu")

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://c3kfyocqwmjsh"]
 
 [ext_resource type="Script" uid="uid://d2x36hj2ddexc" path="res://scenes/ui/menu.gd" id="1_7w7rl"]
-[ext_resource type="Texture2D" uid="uid://dyfe08f7etrbo" path="res://assets/menu/Background_Menu.png" id="2_wedc3"]
-[ext_resource type="Texture2D" uid="uid://dwu31q3pw0bid" path="res://assets/menu/Title_with_Drop_Shadow.png" id="3_c2n5p"]
-[ext_resource type="Texture2D" uid="uid://dugoh7vxq2w0j" path="res://assets/menu/Menu_Board_with_dropshadow.png" id="4_w6y0u"]
+[ext_resource type="Texture2D" uid="uid://cyggdjfh5mim6" path="res://assets/menu/background-menu-psx.png" id="2_ntye7"]
+[ext_resource type="Texture2D" uid="uid://igxq7sjiw85c" path="res://assets/menu/menu-title-psx.png" id="3_cghgw"]
+[ext_resource type="Texture2D" uid="uid://dtevte5ukoakl" path="res://assets/menu/menu-board-psx.png" id="4_1pxh0"]
 [ext_resource type="FontFile" uid="uid://ddd8ijr12v46g" path="res://assets/menu/ChalktasticItalic-pEwZ.ttf" id="5_cx0sj"]
 [ext_resource type="PackedScene" uid="uid://bs3xy0idodo6b" path="res://scenes/ui/settings.tscn" id="6_ntye7"]
 
@@ -32,7 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_wedc3")
+texture = ExtResource("2_ntye7")
 expand_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=2100982866]
@@ -45,7 +45,7 @@ offset_top = -8.0
 offset_right = 478.0
 offset_bottom = 538.0
 grow_horizontal = 2
-texture = ExtResource("3_c2n5p")
+texture = ExtResource("3_cghgw")
 expand_mode = 1
 
 [node name="TextureRect3" type="TextureRect" parent="." unique_id=143995295]
@@ -58,31 +58,31 @@ offset_top = -533.0
 offset_right = 553.0
 offset_bottom = 86.0
 grow_vertical = 0
-texture = ExtResource("4_w6y0u")
+texture = ExtResource("4_1pxh0")
 expand_mode = 1
 
-[node name="MainButtons" type="VBoxContainer" parent="." unique_id=313530489]
+[node name="MainButtons" type="VBoxContainer" parent="TextureRect3" unique_id=313530489]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -478.0
-offset_top = 120.0
-offset_right = -265.0
-offset_bottom = 68.0
+offset_left = -98.5
+offset_top = 5.0
+offset_right = 114.5
+offset_bottom = -47.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="MainButtons" unique_id=452620151]
+[node name="MarginContainer2" type="MarginContainer" parent="TextureRect3/MainButtons" unique_id=452620151]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Button" type="Button" parent="MainButtons/MarginContainer2" unique_id=113177344]
+[node name="Button" type="Button" parent="TextureRect3/MainButtons/MarginContainer2" unique_id=113177344]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_cx0sj")
 theme_override_font_sizes/font_size = 32
@@ -92,14 +92,14 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_cx0sj")
 text = "Start
 "
 
-[node name="MarginContainer3" type="MarginContainer" parent="MainButtons" unique_id=1228737566]
+[node name="MarginContainer3" type="MarginContainer" parent="TextureRect3/MainButtons" unique_id=1228737566]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Button2" type="Button" parent="MainButtons/MarginContainer3" unique_id=1115266102]
+[node name="Button2" type="Button" parent="TextureRect3/MainButtons/MarginContainer3" unique_id=1115266102]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_cx0sj")
 theme_override_font_sizes/font_size = 32
@@ -108,14 +108,14 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_w6y0u")
 theme_override_styles/hover = SubResource("StyleBoxFlat_w6y0u")
 text = "Settings"
 
-[node name="MarginContainer4" type="MarginContainer" parent="MainButtons" unique_id=1006702245]
+[node name="MarginContainer4" type="MarginContainer" parent="TextureRect3/MainButtons" unique_id=1006702245]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Button3" type="Button" parent="MainButtons/MarginContainer4" unique_id=35393591]
+[node name="Button3" type="Button" parent="TextureRect3/MainButtons/MarginContainer4" unique_id=35393591]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_cx0sj")
 theme_override_font_sizes/font_size = 32
@@ -128,6 +128,6 @@ text = "Quit"
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="MainButtons/MarginContainer2/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="MainButtons/MarginContainer3/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="MainButtons/MarginContainer4/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="TextureRect3/MainButtons/MarginContainer2/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="TextureRect3/MainButtons/MarginContainer3/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="TextureRect3/MainButtons/MarginContainer4/Button3" to="." method="_on_button_3_pressed"]

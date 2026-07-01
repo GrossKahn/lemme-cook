@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjx55a6bnex2x"]
+[gd_scene format=3 uid="uid://cjx55a6bnex2x"]
 
 [ext_resource type="Script" uid="uid://dgetyqnwo5dlo" path="res://cutting_board.gd" id="1_m4ftk"]
-[ext_resource type="Texture2D" uid="uid://rsy3y35okmqk" path="res://assets/utensils/Cutting_Board.png" id="2_oihve"]
-[ext_resource type="AudioStream" path="res://sounds/cutting vegans.mp3" id="3_5iosd"]
+[ext_resource type="Texture2D" uid="uid://caw33dv5q6f47" path="res://assets/utensils/cuttingboard-psx.png" id="2_oihve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
 size = Vector2(221, 79.25)
@@ -11,7 +10,7 @@ size = Vector2(221, 79.25)
 script = ExtResource("1_m4ftk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=434012009]
-scale = Vector2(0.3348973, 0.2935774)
+scale = Vector2(1.808307, 1.5851966)
 texture = ExtResource("2_oihve")
 
 [node name="CuttingBoardArea" type="Area2D" parent="." unique_id=1665832752]
@@ -19,9 +18,6 @@ texture = ExtResource("2_oihve")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CuttingBoardArea" unique_id=860712003]
 position = Vector2(0, -4.375)
 shape = SubResource("RectangleShape2D_uhay8")
-
-[node name="AudioCutting" type="AudioStreamPlayer2D" parent="." unique_id=1019108491]
-stream = ExtResource("3_5iosd")
 
 [connection signal="area_entered" from="CuttingBoardArea" to="." method="_on_cutting_board_area_area_entered"]
 [connection signal="area_exited" from="CuttingBoardArea" to="." method="_on_cutting_board_area_area_exited"]
