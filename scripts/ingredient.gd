@@ -234,6 +234,7 @@ func _unhandled_input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and _am_i_mouse_captured:
 			if _dragging:
 				_audio_leave_item.play()
+				pass
 			_dragging = false
 			_mouse_captured = false
 # --- Debug Methods ---

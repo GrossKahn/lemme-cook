@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bebq5vqhcypve" path="res://scenes/minigame/cuttinggame.tscn" id="14_ft6cd"]
 [ext_resource type="AudioStream" uid="uid://rnpt6fj3uxtm" path="res://sounds/Game Theme.mp3" id="15_0i0ei"]
 [ext_resource type="Texture2D" uid="uid://deb74gq55eg8h" path="res://assets/room/end_screen.png" id="16_cvmbd"]
+[ext_resource type="PackedScene" uid="uid://d03rq1hisk5j5" path="res://scenes/ui/pause_menu.tscn" id="18_bb450"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhay8"]
 size = Vector2(86.5, 31)
@@ -176,7 +177,6 @@ autostart = true
 
 [node name="AudioGameTheme" type="AudioStreamPlayer" parent="." unique_id=2109573737]
 stream = ExtResource("15_0i0ei")
-autoplay = true
 
 [node name="SubmissionArea" type="Area2D" parent="." unique_id=221692160]
 position = Vector2(-22, 22)
@@ -228,5 +228,7 @@ offset_top = 3.0
 offset_right = 185.0
 offset_bottom = 95.0
 theme_override_font_sizes/font_size = 67
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=731203850 instance=ExtResource("18_bb450")]
 
 [connection signal="timeout" from="GameManager/Timer" to="GameManager" method="_on_timer_timeout"]
