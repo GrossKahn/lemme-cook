@@ -143,7 +143,7 @@ func _on_timer_timeout() -> void:
 	if not _finished_orders.is_empty() and not _orders.is_empty():
 		print("Orders are not empty")
 		for i in range(_finished_orders.size()):
-			if i > _orders.size():
+			if i >= _orders.size():
 				break 
 			var order: Recipe = _orders[i]
 			var finished: Dictionary = _finished_orders[i]
