@@ -18,7 +18,8 @@ shape = SubResource("RectangleShape2D_3stb6")
 
 [node name="AudioPickUp" type="AudioStreamPlayer2D" parent="." unique_id=1639477094]
 stream = ExtResource("2_mh66k")
+volume_db = -30.0
 
 [node name="AudioLeaveItem" type="AudioStreamPlayer2D" parent="." unique_id=386186607]
 stream = SubResource("AudioStreamMP3_ssx0k")
-volume_db = -24.466
+volume_db = -30.0

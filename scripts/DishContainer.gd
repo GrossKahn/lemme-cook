@@ -135,7 +135,7 @@ func _input(event):
 					updateTasteValues(ingredient)
 
 					print("Ingredient eingesammelt:", ingredient.id)
-					_audio_leave_item.play()
+					#_audio_leave_item.play()
 					print(ingredients)
 					
 					
@@ -150,7 +150,8 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			if _dragging:
-				_audio_leave_item.play()
+				#_audio_leave_item.play()
+				pass
 			_dragging = false
 
 func set_size(width: float, height: float) -> void:

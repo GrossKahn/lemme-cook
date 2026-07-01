@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmuo62w0syth3"]
+[gd_scene format=3 uid="uid://cmuo62w0syth3"]
 
 [ext_resource type="Script" uid="uid://dmc4oqgamimhp" path="res://scripts/DishContainer.gd" id="1_f02qf"]
-[ext_resource type="AudioStream" path="res://sounds/pick up item.mp3" id="2_ff1mh"]
-[ext_resource type="AudioStream" path="res://sounds/leave item.mp3" id="3_7l3j8"]
-[ext_resource type="AudioStream" path="res://sounds/sizzling.mp3" id="4_mi2rb"]
-[ext_resource type="AudioStream" path="res://sounds/ovenend.mp3" id="5_hkfc5"]
+[ext_resource type="AudioStream" uid="uid://bpxetuxni7rnm" path="res://sounds/pick up item.mp3" id="2_ff1mh"]
+[ext_resource type="AudioStream" uid="uid://yd7frhgd2iqt" path="res://sounds/leave item.mp3" id="3_7l3j8"]
+[ext_resource type="AudioStream" uid="uid://debbim35exlfh" path="res://sounds/sizzling.mp3" id="4_mi2rb"]
+[ext_resource type="AudioStream" uid="uid://dfvtvpsvq3cs7" path="res://sounds/ovenend.mp3" id="5_hkfc5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7684"]
 size = Vector2(121, 122)
@@ -19,16 +19,19 @@ shape = SubResource("RectangleShape2D_d7684")
 
 [node name="AudioPickUp" type="AudioStreamPlayer2D" parent="." unique_id=1138984731]
 stream = ExtResource("2_ff1mh")
+volume_db = -30.0
 
 [node name="AudioLeaveItem" type="AudioStreamPlayer2D" parent="." unique_id=285318930]
 stream = ExtResource("3_7l3j8")
+volume_db = -30.0
 
 [node name="AudioSizzling" type="AudioStreamPlayer2D" parent="." unique_id=1785097454]
 stream = ExtResource("4_mi2rb")
-volume_db = 12.0
+volume_db = -30.0
 
 [node name="AudioOvenEnd" type="AudioStreamPlayer2D" parent="." unique_id=1251702202]
 stream = ExtResource("5_hkfc5")
+volume_db = -30.0
 
 [connection signal="area_entered" from="DishContainerArea" to="." method="_on_dish_container_area_area_entered"]
 [connection signal="area_exited" from="DishContainerArea" to="." method="_on_dish_container_area_area_exited"]

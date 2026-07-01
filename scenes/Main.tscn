@@ -171,12 +171,14 @@ wait_time = 15.0
 autostart = true
 
 [node name="Timer" type="Timer" parent="GameManager" unique_id=80365269]
-wait_time = 30.0
+wait_time = 120.0
 one_shot = true
 autostart = true
 
 [node name="AudioGameTheme" type="AudioStreamPlayer" parent="." unique_id=2109573737]
 stream = ExtResource("15_0i0ei")
+volume_db = -23.524
+autoplay = true
 
 [node name="SubmissionArea" type="Area2D" parent="." unique_id=221692160]
 position = Vector2(-22, 22)

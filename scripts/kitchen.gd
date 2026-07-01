@@ -46,6 +46,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 			$AudioOpenClose.stream = _FRIDGE_CLOSE_SOUND
 			$AudioOpenClose.play()
 			_lowpass_filter.cutoff_hz=20000
+			$AudioHum.pitch_scale = 1
 			_is_open = false
 			var areas = $IsInFridgeArea.get_overlapping_areas()
 			for area in areas:
@@ -59,6 +60,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 			$AudioOpenClose.stream = _FRIDGE_OPEN_SOUND
 			$AudioOpenClose.play()
 			_lowpass_filter.cutoff_hz=600
+			$AudioHum.pitch_scale = 0.9
 			_is_open = true
 			var areas = $IsInFridgeArea.get_overlapping_areas()
 			for area in areas:

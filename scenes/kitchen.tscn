@@ -31,6 +31,7 @@ hframes = 2
 
 [node name="AudioHum" type="AudioStreamPlayer2D" parent="." unique_id=756945986]
 stream = ExtResource("3_v3ycp")
+volume_db = -5.0
 autoplay = true
 
 [node name="AudioOpenClose" type="AudioStreamPlayer2D" parent="." unique_id=835978600]
